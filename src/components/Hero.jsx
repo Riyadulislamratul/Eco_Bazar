@@ -7,7 +7,7 @@ import OfferImage2 from "../assets/offer2.jpg";
 
 const Hero = () => {
   return (
-    <section className="max-w-7xl mx-auto px-4 lg:px-6 py-8">
+    <section className="container mx-auto px-4 lg:px-6 py-8">
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         {/* ================= LEFT HERO ================= */}
         <div className="lg:col-span-8">
@@ -57,7 +57,7 @@ const Hero = () => {
         <div className="lg:col-span-4 flex flex-col gap-6">
           {/* ================= TOP OFFER ================= */}
           <div
-            className="relative h-[248px] overflow-hidden rounded-xl bg-cover bg-center bg-no-repeat"
+            className="relative h-69 overflow-hidden rounded-xl bg-cover bg-center bg-no-repeat"
             style={{
               backgroundImage: `url(${OfferImage1})`,
             }}
@@ -87,7 +87,7 @@ const Hero = () => {
 
           {/* ================= BOTTOM OFFER ================= */}
           <div
-            className="relative h-[248px] overflow-hidden rounded-xl bg-cover bg-center bg-no-repeat"
+            className="relative h-64.75 overflow-hidden rounded-xl bg-cover bg-center bg-no-repeat"
             style={{
               backgroundImage: `url(${OfferImage2})`,
             }}
