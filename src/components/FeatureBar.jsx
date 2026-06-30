@@ -31,7 +31,7 @@ const features = [
 
 const FeatureBar = () => {
   return (
-    <section className="container mx-auto px-4 lg:px-6 mt-6 relative z-20 ">
+    <section className="container mx-auto px-4 lg:px-6 mt-4 relative z-20 ">
       <div className="bg-white rounded-xl shadow-[1px_1px_2px_0px_rgba(0,0,0,0.1)] border border-gray-100 overflow-hidden">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
           {features.map((feature, index) => (
