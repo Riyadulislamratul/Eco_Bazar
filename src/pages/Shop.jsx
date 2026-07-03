@@ -1,69 +1,88 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { X } from "lucide-react";
 
 import productsData from "../data/products";
 
+import Container from "../components/Common/Container";
 import PageHeader from "../components/Common/PageHeader";
 import Breadcrumb from "../components/Common/Breadcrumb";
-import Container from "../components/Common/Container";
 
 import Sidebar from "../components/Shop/Sidebar";
 import ShopToolbar from "../components/Shop/ShopToolbar";
+import Pagination from "../components/Shop/Pagination";
 
 import ProductGrid from "../components/Product/ProductGrid";
 
-// Banner Image
-import ShopBanner from "../assets/shop-banner.jpg";
+// Replace with your own banner image
+import ShopBanner from "../assets/banner/shop-banner.png";
 
 const Shop = () => {
+  // ===========================
+  // Sidebar
+  // ===========================
+
   const [showSidebar, setShowSidebar] = useState(false);
 
-  const [selectedCategory, setSelectedCategory] =
-    useState("all");
+  // ===========================
+  // Filters
+  // ===========================
 
-  const [selectedPrice, setSelectedPrice] =
-    useState(500);
+  const [selectedCategory, setSelectedCategory] = useState("all");
 
-  const [selectedRating, setSelectedRating] =
-    useState(null);
+  const [selectedPrice, setSelectedPrice] = useState(500);
 
-  const [selectedTags, setSelectedTags] =
-    useState([]);
+  const [selectedRating, setSelectedRating] = useState(null);
 
-  const [sortBy, setSortBy] =
-    useState("Latest");
+  const [selectedTags, setSelectedTags] = useState([]);
 
-  const [showCount, setShowCount] =
-    useState(12);
+  // ===========================
+  // Toolbar
+  // ===========================
+
+  const [sortBy, setSortBy] = useState("Latest");
+
+  const [showCount, setShowCount] = useState(12);
+
+  // ===========================
+  // Pagination
+  // ===========================
+
+  const [currentPage, setCurrentPage] = useState(1);
+
+  // ===========================
+  // Filter Products
+  // ===========================
 
   const filteredProducts = useMemo(() => {
     let result = [...productsData];
 
-    // Category Filter
+    // Category
+
     if (selectedCategory !== "all") {
       result = result.filter(
         (product) =>
           product.category
             .toLowerCase()
-            .replace(/\s+/g, "-") ===
-          selectedCategory
+            .replace(/\s+/g, "-") === selectedCategory
       );
     }
 
-    // Price Filter
+    // Price
+
     result = result.filter(
       (product) => product.price <= selectedPrice
     );
 
-    // Rating Filter
+    // Rating
+
     if (selectedRating) {
       result = result.filter(
-        (product) =>
-          product.rating >= selectedRating
+        (product) => product.rating >= selectedRating
       );
     }
 
-    // Tag Filter
+    // Tags
+
     if (selectedTags.length > 0) {
       result = result.filter((product) =>
         product.tags?.some((tag) =>
@@ -75,6 +94,7 @@ const Shop = () => {
     }
 
     // Sorting
+
     switch (sortBy) {
       case "Price Low to High":
         result.sort((a, b) => a.price - b.price);
@@ -88,11 +108,46 @@ const Shop = () => {
         result.sort((a, b) => b.rating - a.rating);
         break;
 
+      case "Newest":
+        result.sort((a, b) => b.id - a.id);
+        break;
+
+      case "Oldest":
+        result.sort((a, b) => a.id - b.id);
+        break;
+
       default:
         break;
     }
 
-    return result.slice(0, showCount);
+    return result;
+  }, [
+    selectedCategory,
+    selectedPrice,
+    selectedRating,
+    selectedTags,
+    sortBy,
+  ]);
+
+  // ===========================
+  // Pagination Logic
+  // ===========================
+
+  const totalPages = Math.ceil(
+    filteredProducts.length / showCount
+  );
+
+  const currentProducts = filteredProducts.slice(
+    (currentPage - 1) * showCount,
+    currentPage * showCount
+  );
+
+  // ===========================
+  // Reset page when filter changes
+  // ===========================
+
+  useEffect(() => {
+    setCurrentPage(1);
   }, [
     selectedCategory,
     selectedPrice,
@@ -104,20 +159,19 @@ const Shop = () => {
 
   return (
     <>
-      {/* Header */}
+      {/* ================= Banner ================= */}
 
       <PageHeader
         title="Shop"
         backgroundImage={ShopBanner}
       >
-        <Breadcrumb
-          items={["Home", "Shop"]}
-        />
+        <Breadcrumb items={["Home", "Shop"]} />
       </PageHeader>
 
-      <Container className="py-12">
+      {/* ================= Shop ================= */}
 
-        <div className="grid grid-cols-1 gap-8 lg:grid-cols-12">
+      <Container className="py-14">
+        <div className="grid grid-cols-1 gap-10 lg:grid-cols-12">
 
           {/* Desktop Sidebar */}
 
@@ -126,18 +180,10 @@ const Shop = () => {
             <div className="sticky top-28">
 
               <Sidebar
-                onCategoryChange={
-                  setSelectedCategory
-                }
-                onPriceChange={
-                  setSelectedPrice
-                }
-                onRatingChange={
-                  setSelectedRating
-                }
-                onTagsChange={
-                  setSelectedTags
-                }
+                onCategoryChange={setSelectedCategory}
+                onPriceChange={setSelectedPrice}
+                onRatingChange={setSelectedRating}
+                onTagsChange={setSelectedTags}
               />
 
             </div>
@@ -149,9 +195,7 @@ const Shop = () => {
           <div className="lg:col-span-9">
 
             <ShopToolbar
-              totalProducts={
-                filteredProducts.length
-              }
+              totalProducts={filteredProducts.length}
               sortBy={sortBy}
               show={showCount}
               onSortChange={setSortBy}
@@ -162,51 +206,50 @@ const Shop = () => {
             />
 
             <ProductGrid
-              products={filteredProducts}
+              products={currentProducts}
+              columns={3}
+            />
+
+            <Pagination
+              currentPage={currentPage}
+              totalPages={totalPages}
+              onPageChange={setCurrentPage}
             />
 
           </div>
 
         </div>
-
       </Container>
 
-      {/* Mobile Sidebar */}
+      {/* ================= Mobile Sidebar ================= */}
 
       {showSidebar && (
         <div className="fixed inset-0 z-50 bg-black/40 lg:hidden">
 
-          <div className="h-full w-80 overflow-y-auto bg-white p-6">
+          <div className="ml-auto h-full w-80 overflow-y-auto bg-white p-6">
 
             <div className="mb-6 flex items-center justify-between">
 
-              <h2 className="text-xl font-bold">
+              <h2 className="text-2xl font-bold">
                 Filters
               </h2>
 
               <button
-                onClick={() =>
-                  setShowSidebar(false)
-                }
+                onClick={() => setShowSidebar(false)}
               >
-                <X size={24} />
+                <X />
               </button>
 
             </div>
 
             <Sidebar
-              onCategoryChange={
-                setSelectedCategory
-              }
-              onPriceChange={
-                setSelectedPrice
-              }
-              onRatingChange={
-                setSelectedRating
-              }
-              onTagsChange={
-                setSelectedTags
-              }
+              onCategoryChange={(value) => {
+                setSelectedCategory(value);
+                setShowSidebar(false);
+              }}
+              onPriceChange={setSelectedPrice}
+              onRatingChange={setSelectedRating}
+              onTagsChange={setSelectedTags}
             />
 
           </div>
