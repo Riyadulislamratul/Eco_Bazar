@@ -1,7 +1,7 @@
 import React from "react";
 
 
-import Rating from "../Product/Rating";
+import Rating from "../product/Rating";
 import Price from "../Common/Price";
 import QuantitySelector from "./QuantitySelector";
 

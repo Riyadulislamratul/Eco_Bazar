@@ -7,10 +7,10 @@ import Container from "../components/Common/Container";
 import PageHeader from "../components/Common/PageHeader";
 import Breadcrumb from "../components/Common/Breadcrumb";
 
-import ProductGallery from "../components/ProductDetails/ProductGallery";
-import ProductInfo from "../components/ProductDetails/ProductInfo";
-import ProductTabs from "../components/ProductDetails/ProductTabs";
-import RelatedProducts from "../components/ProductDetails/RelatedProducts";
+import ProductGallery from "../components/productdetails/ProductGallery";
+import ProductInfo from "../components/productdetails/ProductInfo";
+import ProductTabs from "../components/productdetails/ProductTabs";
+import RelatedProducts from "../components/productdetails/RelatedProducts";
 
 import Banner from "../assets/banner/product-banner.png";
 

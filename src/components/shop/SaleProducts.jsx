@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router";
 import products from "../../data/products";
-import Rating from "../Product/Rating";
+import Rating from "../product/Rating";
 
 const SaleProducts = ({
   title = "Sale Products",
