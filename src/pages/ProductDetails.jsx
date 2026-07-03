@@ -7,6 +7,10 @@ import Container from "../components/common/Container";
 import PageHeader from "../components/common/PageHeader";
 import Breadcrumb from "../components/common/Breadcrumb";
 
+// import ProductGallery from "../components/productdetails/ProductGallery";
+// import ProductInfo from "../components/productdetails/ProductInfo";
+// import ProductTabs from "../components/productdetails/ProductTabs";
+// import RelatedProducts from "../components/productdetails/RelatedProducts";
 import ProductGallery from "../components/productdetails/ProductGallery";
 import ProductInfo from "../components/productdetails/ProductInfo";
 import ProductTabs from "../components/productdetails/ProductTabs";
