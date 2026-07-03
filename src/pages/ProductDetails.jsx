@@ -3,9 +3,9 @@ import { useParams } from "react-router-dom";
 
 import products from "../data/products";
 
-import Container from "../components/Common/Container";
-import PageHeader from "../components/Common/PageHeader";
-import Breadcrumb from "../components/Common/Breadcrumb";
+import Container from "../components/common/Container";
+import PageHeader from "../components/common/PageHeader";
+import Breadcrumb from "../components/common/Breadcrumb";
 
 import ProductGallery from "../components/productdetails/ProductGallery";
 import ProductInfo from "../components/productdetails/ProductInfo";
