@@ -5,6 +5,7 @@ import MainLayout from './components/MainLayout';
 import HomePage from './pages/HomePage';
 import NotFoundPage from './pages/NotFoundPage';
 import SignInPage from './pages/SignInPage';
+import AboutPage from './pages/AboutPage';
 
 const router = createBrowserRouter([
   {
@@ -18,6 +19,10 @@ const router = createBrowserRouter([
       {
         path: "/signin",
         element: <SignInPage />,
+      },
+      {
+        path: "/about",
+        element: <AboutPage />,
       },
       {
         path: "*",
