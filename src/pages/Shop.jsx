@@ -3,15 +3,15 @@ import { X } from "lucide-react";
 
 import productsData from "../data/products";
 
-import Container from "../components/Common/Container";
-import PageHeader from "../components/Common/PageHeader";
-import Breadcrumb from "../components/Common/Breadcrumb";
+import Container from "../components/common/Container";
+import PageHeader from "../components/common/PageHeader";
+import Breadcrumb from "../components/common/Breadcrumb";
 
-import Sidebar from "../components/Shop/Sidebar";
-import ShopToolbar from "../components/Shop/ShopToolbar";
-import Pagination from "../components/Shop/Pagination";
+import Sidebar from "../components/shop/Sidebar";
+import ShopToolbar from "../components/shop/ShopToolbar";
+import Pagination from "../components/shop/Pagination";
 
-import ProductGrid from "../components/Product/ProductGrid";
+import ProductGrid from "../components/product/ProductGrid";
 
 // Replace with your own banner image
 import ShopBanner from "../assets/banner/shop-banner.png";
