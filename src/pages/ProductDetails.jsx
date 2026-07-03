@@ -26,9 +26,7 @@ const ProductDetails = () => {
   if (!product) {
     return (
       <Container className="py-20 text-center">
-        <h2 className="text-3xl font-bold">
-          Product Not Found
-        </h2>
+        <h2 className="text-3xl font-bold">Product Not Found</h2>
 
         <p className="mt-3 text-gray-500">
           The requested product doesn't exist.
@@ -42,9 +40,7 @@ const ProductDetails = () => {
   };
 
   const decreaseQuantity = () => {
-    setQuantity((prev) =>
-      prev > 1 ? prev - 1 : 1
-    );
+    setQuantity((prev) => (prev > 1 ? prev - 1 : 1));
   };
 
   const handleAddToCart = () => {
@@ -62,30 +58,18 @@ const ProductDetails = () => {
     <>
       {/* Page Header */}
 
-      <PageHeader
-        title={product.name}
-        backgroundImage={Banner}
-      >
-        <Breadcrumb
-          items={[
-            "Home",
-            "Shop",
-            product.category,
-            product.name,
-          ]}
-        />
+      <PageHeader title={product.name} backgroundImage={Banner}>
+        <Breadcrumb items={["Home", "Shop", product.category, product.name]} />
       </PageHeader>
 
       {/* Product */}
 
       <Container className="py-16">
-
         <div className="grid grid-cols-1 gap-16 lg:grid-cols-2">
-
           {/* Gallery */}
 
           <ProductGallery
-            images={product.images}
+            images={product.images || [product.image]}
             sale={product.sale}
             discount={product.discount}
           />
@@ -100,21 +84,15 @@ const ProductDetails = () => {
             onAddToCart={handleAddToCart}
             onWishlist={handleWishlist}
           />
-
         </div>
 
         {/* Tabs */}
 
-        <ProductTabs
-          product={product}
-        />
+        <ProductTabs product={product} />
 
         {/* Related */}
 
-        <RelatedProducts
-          currentProduct={product}
-        />
-
+        <RelatedProducts currentProduct={product} />
       </Container>
     </>
   );
