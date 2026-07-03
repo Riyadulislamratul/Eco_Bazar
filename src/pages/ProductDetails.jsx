@@ -11,10 +11,10 @@ import Breadcrumb from "../components/common/Breadcrumb";
 // import ProductInfo from "../components/productdetails/ProductInfo";
 // import ProductTabs from "../components/productdetails/ProductTabs";
 // import RelatedProducts from "../components/productdetails/RelatedProducts";
-import ProductGallery from "../components/productdetails/ProductGallery";
-import ProductInfo from "../components/productdetails/ProductInfo";
-import ProductTabs from "../components/productdetails/ProductTabs";
-import RelatedProducts from "../components/productdetails/RelatedProducts";
+import ProductGallery from "../components/product_details/ProductGallery";
+import ProductInfo from "../components/product_details/ProductInfo";
+import ProductTabs from "../components/product_details/ProductTabs";
+import RelatedProducts from "../components/product_details/RelatedProducts";
 
 import Banner from "../assets/banner/product-banner.png";
 
@@ -73,7 +73,7 @@ const ProductDetails = () => {
           {/* Gallery */}
 
           <ProductGallery
-            images={product.images || [product.image]}
+            images={product.gallery}
             sale={product.sale}
             discount={product.discount}
           />
