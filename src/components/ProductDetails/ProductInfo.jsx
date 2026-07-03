@@ -1,10 +1,5 @@
 import React from "react";
-import {
-  Heart,
-  Facebook,
-  Twitter,
-  Instagram,
-} from "lucide-react";
+
 
 import Rating from "../Product/Rating";
 import Price from "../Common/Price";
@@ -112,7 +107,7 @@ const ProductInfo = ({
           onClick={onWishlist}
           className="flex h-14 w-14 items-center justify-center rounded-full bg-green-100 text-green-600 transition hover:bg-green-600 hover:text-white"
         >
-          <Heart size={22} />
+          {/* <Heart size={22} /> */}
         </button>
 
       </div>
@@ -129,15 +124,15 @@ const ProductInfo = ({
         <div className="flex gap-3">
 
           <button className="rounded-full border p-3 hover:bg-green-600 hover:text-white">
-            <Facebook size={18} />
+            {/* <Facebook size={18} /> */}
           </button>
 
           <button className="rounded-full border p-3 hover:bg-green-600 hover:text-white">
-            <Twitter size={18} />
+            {/* <Twitter size={18} /> */}
           </button>
 
           <button className="rounded-full border p-3 hover:bg-green-600 hover:text-white">
-            <Instagram size={18} />
+            {/* <Instagram size={18} /> */}
           </button>
 
         </div>

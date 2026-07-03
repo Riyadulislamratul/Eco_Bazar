@@ -1,9 +1,6 @@
 import React from "react";
-import {
-  Heart,
-  Eye,
-  ShoppingBag,
-} from "lucide-react";
+import { Heart, Eye, ShoppingBag } from "lucide-react";
+import { Link } from "react-router-dom";
 import Rating from "./Rating";
 
 const ProductCard = ({ product }) => {
@@ -16,6 +13,7 @@ const ProductCard = ({ product }) => {
     rating,
     reviews,
     stock,
+    slug,
   } = product;
 
   return (
@@ -48,29 +46,32 @@ const ProductCard = ({ product }) => {
 
       </div>
 
-      {/* Product Image */}
+      {/* Product Image (CLICKABLE) */}
+      <Link to={`/product/${slug}`}>
+        <div className="flex h-64 items-center justify-center overflow-hidden p-6">
 
-      <div className="flex h-64 items-center justify-center overflow-hidden p-6">
+          <img
+            src={image}
+            alt={name}
+            className="h-full object-contain transition-transform duration-500 group-hover:scale-110"
+          />
 
-        <img
-          src={image}
-          alt={name}
-          className="h-full object-contain transition-transform duration-500 group-hover:scale-110"
-        />
-
-      </div>
+        </div>
+      </Link>
 
       {/* Product Info */}
-
       <div className="border-t border-gray-100 p-4">
 
         <div className="flex items-start justify-between gap-3">
 
           <div>
 
-            <h3 className="text-base font-medium text-gray-700 transition-colors group-hover:text-green-600">
-              {name}
-            </h3>
+            {/* Product Name (CLICKABLE) */}
+            <Link to={`/product/${slug}`}>
+              <h3 className="text-base font-medium text-gray-700 transition-colors group-hover:text-green-600">
+                {name}
+              </h3>
+            </Link>
 
             <div className="mt-2 flex items-center gap-2">
 
@@ -87,17 +88,12 @@ const ProductCard = ({ product }) => {
             </div>
 
             <div className="mt-2">
-              <Rating
-                rating={rating}
-                showCount
-                reviewCount={reviews}
-              />
+              <Rating rating={rating} showCount reviewCount={reviews} />
             </div>
 
           </div>
 
           {/* Cart Button */}
-
           <button
             disabled={stock === 0}
             className={`flex h-11 w-11 items-center justify-center rounded-full transition-all duration-300

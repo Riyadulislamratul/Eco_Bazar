@@ -1,12 +1,15 @@
 import React from 'react'
-import { createBrowserRouter } from "react-router";
-import { RouterProvider } from "react-router/dom";
+import {
+  createBrowserRouter,
+  RouterProvider,
+} from "react-router-dom";
 import MainLayout from './components/MainLayout';
 import HomePage from './pages/HomePage';
 import NotFoundPage from './pages/NotFoundPage';
 import SignInPage from './pages/SignInPage';
 import AboutPage from './pages/AboutPage';
 import Shop from './pages/Shop';
+import ProductDetails from "./pages/ProductDetails";
 
 const router = createBrowserRouter([
   {
@@ -18,17 +21,22 @@ const router = createBrowserRouter([
         element: <HomePage />,
       },
       {
-        path: "/signin",
+        path: "signin",
         element: <SignInPage />,
       },
       {
-        path: "/about",
+        path: "about",
         element: <AboutPage />,
       },
       {
-        path: "/shop",
+        path: "shop",
         element: <Shop />,
       },
+      {
+        path: "product/:slug",
+        element: <ProductDetails />,
+      },
+      
       {
         path: "*",
         element: <NotFoundPage />,
