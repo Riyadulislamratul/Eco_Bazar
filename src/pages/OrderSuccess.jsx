@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { CircleCheckBig } from "lucide-react";
 
-import Container from "../components/Common/Container";
+import Container from "../components/common/Container";
 
 const OrderSuccess = () => {
   return (
