@@ -1,5 +1,5 @@
 import React from "react";
-import Rating from "../temproduct/Rating";
+import Rating from "../product/Rating";
 
 const ReviewsTab = ({ reviews = [] }) => {
   return (

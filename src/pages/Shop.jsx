@@ -11,7 +11,7 @@ import Sidebar from "../components/shop/Sidebar";
 import ShopToolbar from "../components/shop/ShopToolbar";
 import Pagination from "../components/shop/Pagination";
 
-import ProductGrid from "../components/temproduct/ProductGrid";
+import ProductGrid from "../components/product/ProductGrid";
 
 // Replace with your own banner image
 import ShopBanner from "../assets/banner/shop-banner.png";

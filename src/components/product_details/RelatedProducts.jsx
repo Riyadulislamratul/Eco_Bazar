@@ -2,7 +2,7 @@ import React, { useMemo } from "react";
 
 import products from "../../data/products";
 
-import ProductGrid from "../temproduct/ProductGrid";
+import ProductGrid from "../product/ProductGrid";
 import SectionHeading from "../common/SectionHeading";
 
 const RelatedProducts = ({

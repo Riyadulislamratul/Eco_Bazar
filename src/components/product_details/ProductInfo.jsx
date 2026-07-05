@@ -1,6 +1,6 @@
 import React from "react";
 
-import Rating from "../temproduct/Rating";
+import Rating from "../product/Rating";
 import Price from "../common/Price";
 import QuantitySelector from "./QuantitySelector";
 
