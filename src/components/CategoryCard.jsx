@@ -1,10 +1,16 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const CategoryCard = ({ image, title, products }) => {
+const CategoryCard = ({
+  image,
+  title,
+  category,
+}) => {
   return (
-    <Link to={`/shop?category=${encodeURIComponent(title)}`}>
-      <div className="group cursor-pointer rounded-lg border border-gray-200 bg-white p-6 transition-all duration-300 hover:border-green-500 hover:shadow-xl w-50 h-53.25">
+    <Link
+      to={`/shop?category=${encodeURIComponent(category)}`}
+    >
+      <div className="group h-53.25 w-50 cursor-pointer rounded-lg border border-gray-200 bg-white p-6 transition-all duration-300 hover:border-green-500 hover:shadow-xl">
         {/* Image */}
         <div className="flex justify-center">
           <img

@@ -68,6 +68,7 @@ const Shop = () => {
       setSelectedCategory("all");
     }
   }, [searchParams]);
+  
 
   // ===========================
   // Filter Products
@@ -176,7 +177,6 @@ const Shop = () => {
     sortBy,
     showCount,
   ]);
-
   return (
     <>
       {/* Banner */}
@@ -281,6 +281,7 @@ const Shop = () => {
           </div>
 
         </div>
+        
       )}
     </>
   );
