@@ -11,6 +11,7 @@ import AboutPage from './pages/AboutPage';
 import Shop from './pages/Shop';
 import ProductDetails from "./pages/ProductDetails";
 import Wishlist from "./pages/Wishlist";
+import Cart from "./pages/Cart";
 
 const router = createBrowserRouter([
   {
@@ -41,7 +42,10 @@ const router = createBrowserRouter([
         path: "wishlist",
         element: <Wishlist />,
       },
-      
+      {
+        path: "cart",
+        element: <Cart />,
+      },
       {
         path: "*",
         element: <NotFoundPage />,

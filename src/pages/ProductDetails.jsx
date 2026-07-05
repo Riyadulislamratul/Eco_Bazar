@@ -16,6 +16,8 @@ import ProductInfo from "../components/product_details/ProductInfo";
 import ProductTabs from "../components/product_details/ProductTabs";
 import RelatedProducts from "../components/product_details/RelatedProducts";
 
+import { useCart } from "../context/CartContext";
+
 import Banner from "../assets/banner/product-banner.png";
 
 const ProductDetails = () => {
@@ -26,6 +28,8 @@ const ProductDetails = () => {
   const product = useMemo(() => {
     return products.find((item) => item.slug === slug);
   }, [slug]);
+
+  const { addToCart } = useCart();
 
   if (!product) {
     return (
@@ -47,12 +51,9 @@ const ProductDetails = () => {
     setQuantity((prev) => (prev > 1 ? prev - 1 : 1));
   };
 
-  const handleAddToCart = () => {
-    console.log({
-      product,
-      quantity,
-    });
-  };
+ const handleAddToCart = () => {
+  addToCart(product, quantity);
+};
 
   const handleWishlist = () => {
     console.log(product);

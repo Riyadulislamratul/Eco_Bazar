@@ -3,6 +3,7 @@ import { Heart, Eye, ShoppingBag } from "lucide-react";
 import { Link } from "react-router-dom";
 import Rating from "./Rating";
 import { useWishlist } from "../../context/WishlistContext";
+import { useCart } from "../../context/CartContext";
 
 const ProductCard = ({ product }) => {
   const {
@@ -18,6 +19,7 @@ const ProductCard = ({ product }) => {
   } = product;
 
   const { toggleWishlist, isInWishlist } = useWishlist();
+  const { addToCart } = useCart();
 
   const wishlistActive = isInWishlist(product.id);
 
@@ -97,13 +99,14 @@ const ProductCard = ({ product }) => {
 
           {/* Cart Button */}
           <button
+            onClick={() => addToCart(product)}
             disabled={stock === 0}
             className={`flex h-11 w-11 items-center justify-center rounded-full transition-all duration-300
-            ${
-              stock === 0
-                ? "cursor-not-allowed bg-gray-200 text-gray-400"
-                : "bg-gray-100 hover:bg-green-600 hover:text-white"
-            }`}
+  ${
+    stock === 0
+      ? "cursor-not-allowed bg-gray-200 text-gray-400"
+      : "bg-gray-100 hover:bg-green-600 hover:text-white"
+  }`}
           >
             <ShoppingBag size={20} />
           </button>

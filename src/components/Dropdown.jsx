@@ -2,68 +2,97 @@ import { useState } from "react";
 import { ChevronDown } from "lucide-react";
 import { Link } from "react-router-dom";
 
-const Dropdown = ({
+export default function Dropdown({
   title,
   items = [],
   width = "w-56",
   textColor = "text-gray-700",
   menuPosition = "left-0",
   onSelect,
-}) => {
+}) {
   const [open, setOpen] = useState(false);
 
   const handleToggle = () => {
-    setOpen((prev) => !prev);
+    if (window.innerWidth < 1024) {
+      setOpen((prev) => !prev);
+    }
   };
 
   return (
     <div
       className="relative"
-      onMouseEnter={() => window.innerWidth >= 1024 && setOpen(true)}
-      onMouseLeave={() => window.innerWidth >= 1024 && setOpen(false)}
+      onMouseEnter={() => {
+        if (window.innerWidth >= 1024) {
+          setOpen(true);
+        }
+      }}
+      onMouseLeave={() => {
+        if (window.innerWidth >= 1024) {
+          setOpen(false);
+        }
+      }}
     >
-      {/* Dropdown Button */}
+      {/* Button */}
+
       <button
         type="button"
         onClick={handleToggle}
-        className={`flex items-center gap-1 cursor-pointer ${textColor}`}
+        className={`flex items-center gap-1 transition ${textColor}`}
       >
-        {title}
+        <span>{title}</span>
 
         <ChevronDown
-          size={14}
-          className={`transition-transform duration-300 ${
+          size={15}
+          className={`transition-all duration-300 ${
             open ? "rotate-180" : ""
           }`}
         />
       </button>
 
-      {/* Dropdown Menu */}
+      {/* Dropdown */}
+
       <div
-        className={`absolute ${menuPosition} top-full z-50 mt-2 ${width}
-        rounded-md bg-white py-2 shadow-xl transition-all duration-200
-        ${
-          open
-            ? "visible translate-y-0 opacity-100"
-            : "invisible -translate-y-2 opacity-0"
-        }`}
+        className={`
+          absolute
+          ${menuPosition}
+          top-full
+          z-50
+          mt-3
+          ${width}
+          origin-top
+          rounded-lg
+          bg-white
+          py-2
+          shadow-2xl
+          ring-1
+          ring-gray-100
+          transition-all
+          duration-300
+          ${
+            open
+              ? "visible translate-y-0 scale-100 opacity-100"
+              : "invisible -translate-y-3 scale-95 opacity-0"
+          }
+        `}
       >
         {items.map((item, index) => {
-          // Route item
+          // React Router Link
+
           if (typeof item === "object") {
             return (
               <Link
                 key={index}
                 to={item.path}
                 onClick={() => setOpen(false)}
-                className="block px-4 py-2 text-sm text-gray-700 hover:bg-green-50 hover:text-green-600"
+                className="block px-5 py-3 text-sm text-gray-700 transition-all duration-200 hover:bg-green-50 hover:pl-7 hover:text-green-600"
               >
                 {item.name}
               </Link>
             );
           }
 
-          // Normal string item
+          // Language/Currency
+
           return (
             <button
               key={index}
@@ -72,7 +101,7 @@ const Dropdown = ({
                 onSelect?.(item);
                 setOpen(false);
               }}
-              className="block w-full cursor-pointer px-4 py-2 text-left text-sm text-gray-700 hover:bg-green-50 hover:text-green-600"
+              className="block w-full px-5 py-3 text-left text-sm text-gray-700 transition-all duration-200 hover:bg-green-50 hover:pl-7 hover:text-green-600"
             >
               {item}
             </button>
@@ -81,6 +110,4 @@ const Dropdown = ({
       </div>
     </div>
   );
-};
-
-export default Dropdown;
+}
