@@ -2,9 +2,9 @@ import React from "react";
 
 import { useCart } from "../context/CartContext";
 
-import Container from "../components/Common/Container";
-import PageHeader from "../components/Common/PageHeader";
-import Breadcrumb from "../components/Common/Breadcrumb";
+import Container from "../components/common/Container";
+import PageHeader from "../components/common/PageHeader";
+import Breadcrumb from "../components/common/Breadcrumb";
 
 import CartTable from "../components/cart/CartTable";
 import CartSummary from "../components/cart/CartSummary";
