@@ -15,55 +15,81 @@ import Cooking from "../assets/categories/cooking.png";
 import Diabetic from "../assets/categories/diabetic.png";
 import Dish from "../assets/categories/cooking.png";
 import Oil from "../assets/categories/oil.png";
+import products from "../data/products";
+import categoryImages from "../data/categoryImages";
 
 const categories = [
-  {
+   {
     title: "Fresh Fruit",
-    image: Fruit,
+    category: "Fresh Fruit",
+    slug: "fresh-fruit",
+    image: categoryImages["Fresh Fruit"],
   },
   {
     title: "Fresh Vegetables",
-    image: Vegetables,
+    category: "Fresh Vegetables",
+    slug: "fresh-vegetables",
+    image: categoryImages["Vegetables"],
   },
   {
     title: "Meat & Fish",
-    image: Fish,
+    category: "Meat & Fish",
+    slug: "meat-fish",
+    image: categoryImages["Meat & Fish"],
   },
   {
     title: "Cleaning Needs",
-    image: Cleaner,
+    category: "Cleaning Needs",
+    slug: "cleaning-needs",
+    image: categoryImages["Cleaning Needs"],
   },
   {
     title: "Beverages",
-    image: Beverages,
+    category: "Beverages",
+    slug: "beverages",
+    image: categoryImages["Beverages"],
   },
   {
     title: "Beauty & Health",
-    image: Beauty,
+    category: "Beauty & Health",
+    slug: "beauty-health",
+    image: categoryImages["Beauty & Health"],
   },
   {
     title: "Bread & Bakery",
-    image: Bakery,
+    category: "Bread & Bakery",
+    slug: "bread-bakery",
+    image: categoryImages["Bread & Bakery"],
   },
   {
     title: "Baking Needs",
-    image: Baking,
+    category: "Baking Needs",
+    slug: "baking-needs",
+    image: categoryImages["Baking Needs"],
   },
   {
     title: "Cooking",
-    image: Cooking,
+    category: "Cooking",
+    slug: "cooking",
+    image: categoryImages["Cooking"],
   },
   {
     title: "Diabetic Food",
-    image: Diabetic,
+    category: "Diabetic Food",
+    slug: "diabetic-food",
+    image: categoryImages["Diabetic Food"],
   },
   {
     title: "Dish Detergents",
-    image: Dish,
+    category: "Dish Detergents",
+    slug: "dish-detergents",
+    image: categoryImages["Dish Detergents"],
   },
   {
     title: "Oil",
-    image: Oil,
+    category: "Oil",
+    slug: "oil",
+    image: categoryImages["Oil"],
   },
 ];
 
@@ -86,13 +112,20 @@ const PopularCategories = () => {
 
         {/* Categories */}
         <div className="grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6">
-          {categories.map((category, index) => (
-            <CategoryCard
-              key={index}
-              image={category.image}
-              title={category.title}
-            />
-          ))}
+          {categories.map((category) => {
+  const count = products.filter(
+    (product) => product.category === category.title
+  ).length;
+
+  return (
+    <CategoryCard
+      key={category.id}
+      image={category.image}
+      title={category.title}
+      count={count}
+    />
+  );
+})}
         </div>
       </div>
     </section>

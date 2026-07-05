@@ -1,12 +1,11 @@
-import React, { useState } from "react";
-import categories from "../../data/categories";
+import React from "react";
 
-const CategoryFilter = ({ onCategoryChange }) => {
-  const [selectedCategory, setSelectedCategory] = useState("all");
-
+const CategoryFilter = ({
+  categories = [],
+  selectedCategory = "all",
+  onCategoryChange,
+}) => {
   const handleChange = (slug) => {
-    setSelectedCategory(slug);
-
     if (onCategoryChange) {
       onCategoryChange(slug);
     }
@@ -14,13 +13,9 @@ const CategoryFilter = ({ onCategoryChange }) => {
 
   return (
     <div className="space-y-4">
-
       {/* All Categories */}
-
-      <label className="flex items-center justify-between cursor-pointer group">
-
+      <label className="group flex cursor-pointer items-center justify-between">
         <div className="flex items-center gap-3">
-
           <input
             type="radio"
             name="category"
@@ -38,46 +33,41 @@ const CategoryFilter = ({ onCategoryChange }) => {
           >
             All
           </span>
-
         </div>
-
       </label>
 
       {/* Categories */}
+      {categories.length > 0 &&
+        categories.map((category) => (
+          <label
+            key={category.slug}
+            className="group flex cursor-pointer items-center justify-between"
+          >
+            <div className="flex items-center gap-3">
+              <input
+                type="radio"
+                name="category"
+                checked={selectedCategory === category.slug}
+                onChange={() => handleChange(category.slug)}
+                className="h-4 w-4 accent-green-600"
+              />
 
-      {categories.map((category) => (
-        <label
-          key={category.id}
-          className="flex cursor-pointer items-center justify-between group"
-        >
-          <div className="flex items-center gap-3">
+              <span
+                className={`transition-colors ${
+                  selectedCategory === category.slug
+                    ? "font-semibold text-green-600"
+                    : "text-gray-700 group-hover:text-green-600"
+                }`}
+              >
+                {category.name}
+              </span>
+            </div>
 
-            <input
-              type="radio"
-              name="category"
-              checked={selectedCategory === category.slug}
-              onChange={() => handleChange(category.slug)}
-              className="h-4 w-4 accent-green-600"
-            />
-
-            <span
-              className={`transition-colors ${
-                selectedCategory === category.slug
-                  ? "font-semibold text-green-600"
-                  : "text-gray-700 group-hover:text-green-600"
-              }`}
-            >
-              {category.name}
+            <span className="text-sm text-gray-500">
+              ({category.productCount})
             </span>
-
-          </div>
-
-          <span className="text-sm text-gray-500">
-            ({category.productCount})
-          </span>
-
-        </label>
-      ))}
+          </label>
+        ))}
     </div>
   );
 };

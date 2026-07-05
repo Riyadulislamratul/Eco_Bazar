@@ -1,5 +1,7 @@
 import React from "react";
 
+import categories from "../../data/categories";
+
 import FilterSection from "./FilterSection";
 import CategoryFilter from "./CategoryFilter";
 import PriceFilter from "./PriceFilter";
@@ -8,6 +10,7 @@ import TagFilter from "./TagFilter";
 import SaleProducts from "./SaleProducts";
 
 const Sidebar = ({
+  selectedCategory,
   onCategoryChange,
   onPriceChange,
   onRatingChange,
@@ -15,11 +18,12 @@ const Sidebar = ({
 }) => {
   return (
     <aside className="space-y-8">
-
       {/* Categories */}
 
       <FilterSection title="All Categories">
         <CategoryFilter
+          categories={categories}
+          selectedCategory={selectedCategory}
           onCategoryChange={onCategoryChange}
         />
       </FilterSection>
@@ -54,7 +58,6 @@ const Sidebar = ({
       {/* Sale Products */}
 
       <SaleProducts />
-
     </aside>
   );
 };

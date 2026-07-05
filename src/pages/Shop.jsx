@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { X } from "lucide-react";
+import { useSearchParams } from "react-router-dom";
 
 import productsData from "../data/products";
 
@@ -13,10 +14,11 @@ import Pagination from "../components/shop/Pagination";
 
 import ProductGrid from "../components/product/ProductGrid";
 
-// Replace with your own banner image
 import ShopBanner from "../assets/banner/shop-banner.png";
 
 const Shop = () => {
+  const [searchParams] = useSearchParams();
+
   // ===========================
   // Sidebar
   // ===========================
@@ -48,6 +50,24 @@ const Shop = () => {
   // ===========================
 
   const [currentPage, setCurrentPage] = useState(1);
+
+  // ===========================
+  // Read Category From URL
+  // ===========================
+
+  useEffect(() => {
+    const category = searchParams.get("category");
+
+    if (category) {
+      setSelectedCategory(
+        category
+          .toLowerCase()
+          .replace(/\s+/g, "-")
+      );
+    } else {
+      setSelectedCategory("all");
+    }
+  }, [searchParams]);
 
   // ===========================
   // Filter Products
@@ -130,7 +150,7 @@ const Shop = () => {
   ]);
 
   // ===========================
-  // Pagination Logic
+  // Pagination
   // ===========================
 
   const totalPages = Math.ceil(
@@ -143,7 +163,7 @@ const Shop = () => {
   );
 
   // ===========================
-  // Reset page when filter changes
+  // Reset Page
   // ===========================
 
   useEffect(() => {
@@ -159,7 +179,7 @@ const Shop = () => {
 
   return (
     <>
-      {/* ================= Banner ================= */}
+      {/* Banner */}
 
       <PageHeader
         title="Shop"
@@ -168,18 +188,19 @@ const Shop = () => {
         <Breadcrumb items={["Home", "Shop"]} />
       </PageHeader>
 
-      {/* ================= Shop ================= */}
+      {/* Shop */}
 
       <Container className="py-14">
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-12">
 
-          {/* Desktop Sidebar */}
+          {/* Sidebar */}
 
           <div className="hidden lg:col-span-3 lg:block">
 
             <div className="sticky top-28">
 
               <Sidebar
+                selectedCategory={selectedCategory}
                 onCategoryChange={setSelectedCategory}
                 onPriceChange={setSelectedPrice}
                 onRatingChange={setSelectedRating}
@@ -210,18 +231,20 @@ const Shop = () => {
               columns={3}
             />
 
-            <Pagination
-              currentPage={currentPage}
-              totalPages={totalPages}
-              onPageChange={setCurrentPage}
-            />
+            {filteredProducts.length > 0 && (
+              <Pagination
+                currentPage={currentPage}
+                totalPages={totalPages}
+                onPageChange={setCurrentPage}
+              />
+            )}
 
           </div>
 
         </div>
       </Container>
 
-      {/* ================= Mobile Sidebar ================= */}
+      {/* Mobile Sidebar */}
 
       {showSidebar && (
         <div className="fixed inset-0 z-50 bg-black/40 lg:hidden">
@@ -235,7 +258,9 @@ const Shop = () => {
               </h2>
 
               <button
-                onClick={() => setShowSidebar(false)}
+                onClick={() =>
+                  setShowSidebar(false)
+                }
               >
                 <X />
               </button>
@@ -243,6 +268,7 @@ const Shop = () => {
             </div>
 
             <Sidebar
+              selectedCategory={selectedCategory}
               onCategoryChange={(value) => {
                 setSelectedCategory(value);
                 setShowSidebar(false);

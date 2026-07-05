@@ -1,17 +1,16 @@
-import React from 'react'
-import {
-  createBrowserRouter,
-  RouterProvider,
-} from "react-router-dom";
-import MainLayout from './components/MainLayout';
-import HomePage from './pages/HomePage';
-import NotFoundPage from './pages/NotFoundPage';
-import SignInPage from './pages/SignInPage';
-import AboutPage from './pages/AboutPage';
-import Shop from './pages/Shop';
+import React from "react";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import MainLayout from "./components/MainLayout";
+import HomePage from "./pages/HomePage";
+import NotFoundPage from "./pages/NotFoundPage";
+import SignInPage from "./pages/SignInPage";
+import AboutPage from "./pages/AboutPage";
+import Shop from "./pages/Shop";
 import ProductDetails from "./pages/ProductDetails";
 import Wishlist from "./pages/Wishlist";
 import Cart from "./pages/Cart";
+import Checkout from "./pages/Checkout";
+import OrderSuccess from "./pages/OrderSuccess";
 
 const router = createBrowserRouter([
   {
@@ -47,17 +46,23 @@ const router = createBrowserRouter([
         element: <Cart />,
       },
       {
+        path: "checkout",
+        element: <Checkout />,
+      },
+      {
+        path: "order-success",
+        element: <OrderSuccess />,
+      },
+      {
         path: "*",
         element: <NotFoundPage />,
-      }
-    ]
+      },
+    ],
   },
 ]);
 
 const App = () => {
-  return (
-    <RouterProvider router={router} />
-  )
-}
+  return <RouterProvider router={router} />;
+};
 
-export default App
+export default App;
