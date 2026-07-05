@@ -4,6 +4,11 @@ import Rating from "../product/Rating";
 import Price from "../common/Price";
 import QuantitySelector from "./QuantitySelector";
 
+
+// import Rating from "../product/Rating";
+// import Price from "../common/Price";
+// import QuantitySelector from "./QuantitySelector";
+
 const ProductInfo = ({
   product,
   quantity,
