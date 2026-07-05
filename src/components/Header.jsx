@@ -12,6 +12,7 @@ import {
 
 import Dropdown from "./Dropdown";
 import { useWishlist } from "../context/WishlistContext";
+import { useCart } from "../context/CartContext";
 
 const navMenus = [
   // {
@@ -48,6 +49,7 @@ export default function Header() {
   const [currency, setCurrency] = useState("USD");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { wishlistCount } = useWishlist();
+  const { cartCount, cartTotal } = useCart();
 
   return (
     <header className="w-full">
@@ -151,22 +153,25 @@ export default function Header() {
             <div className="h-8 w-px bg-gray-300" />
 
             <div className="flex items-center gap-3">
-              <Link to="/cart" className="relative">
-                <ShoppingBag
-                  size={25}
-                  className="text-gray-700 hover:text-green-600"
-                />
+              <Link to="/cart" className="flex items-center gap-3">
+                <div className="relative">
+                  <ShoppingBag size={28} className="text-gray-700" />
 
-                <span className="absolute -right-2 -top-2 flex h-5 w-5 items-center justify-center rounded-full bg-green-600 text-[10px] font-semibold text-white">
-                  2
-                </span>
+                  {cartCount > 0 && (
+                    <span className="absolute -right-2 -top-2 flex h-5 w-5 items-center justify-center rounded-full bg-green-600 text-xs font-semibold text-white">
+                      {cartCount > 9 ? "9+" : cartCount}
+                    </span>
+                  )}
+                </div>
+
+                <div className="hidden sm:block">
+                  <p className="text-xs text-gray-500">Shopping cart</p>
+
+                  <p className="font-semibold">${cartTotal.toFixed(2)}</p>
+                </div>
               </Link>
 
-              <div>
-                <p className="text-xs text-gray-500">Shopping Cart</p>
-
-                <p className="font-semibold">$57.00</p>
-              </div>
+              
             </div>
           </div>
         </div>
