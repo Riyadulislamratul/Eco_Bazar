@@ -10,6 +10,7 @@ import SignInPage from './pages/SignInPage';
 import AboutPage from './pages/AboutPage';
 import Shop from './pages/Shop';
 import ProductDetails from "./pages/ProductDetails";
+import Wishlist from "./pages/Wishlist";
 
 const router = createBrowserRouter([
   {
@@ -35,6 +36,10 @@ const router = createBrowserRouter([
       {
         path: "product/:slug",
         element: <ProductDetails />,
+      },
+      {
+        path: "wishlist",
+        element: <Wishlist />,
       },
       
       {
