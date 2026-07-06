@@ -43,7 +43,7 @@ const ProductCard = ({ product }) => {
       <div className="absolute right-3 top-3 z-20 flex translate-x-5 flex-col gap-2 opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100">
         <button
           onClick={() => toggleWishlist(product)}
-          className={`flex h-10 w-10 items-center justify-center rounded-full border shadow transition-all
+          className={`flex h-10 cursor-pointer w-10 items-center justify-center rounded-full border shadow transition-all
   ${
     wishlistActive
       ? "bg-green-600 text-white border-green-600"
@@ -53,7 +53,7 @@ const ProductCard = ({ product }) => {
           <Heart size={18} fill={wishlistActive ? "currentColor" : "none"} />
         </button>
 
-        <button className="flex h-10 w-10 items-center justify-center rounded-full border bg-white shadow hover:bg-green-600 hover:text-white">
+        <button className="flex h-10 cursor-pointer w-10 items-center justify-center rounded-full border bg-white shadow hover:bg-green-600 hover:text-white">
           <Eye size={18} />
         </button>
       </div>
@@ -101,7 +101,7 @@ const ProductCard = ({ product }) => {
           <button
             onClick={() => addToCart(product)}
             disabled={stock === 0}
-            className={`flex h-11 w-11 items-center justify-center rounded-full transition-all duration-300
+            className={`flex h-11 w-11 cursor-pointer items-center justify-center rounded-full transition-all duration-300
   ${
     stock === 0
       ? "cursor-not-allowed bg-gray-200 text-gray-400"

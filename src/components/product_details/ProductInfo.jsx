@@ -1,13 +1,12 @@
 import React from "react";
+import { Heart } from "lucide-react";
+import { FaFacebookF, FaInstagram } from "react-icons/fa";
+import { BsTwitter } from "react-icons/bs";
 
 import Rating from "../product/Rating";
 import Price from "../common/Price";
 import QuantitySelector from "./QuantitySelector";
 
-
-// import Rating from "../product/Rating";
-// import Price from "../common/Price";
-// import QuantitySelector from "./QuantitySelector";
 
 const ProductInfo = ({
   product,
@@ -102,16 +101,16 @@ const ProductInfo = ({
 
         <button
           onClick={onAddToCart}
-          className="flex-1 rounded-full bg-green-600 py-4 font-semibold text-white transition hover:bg-green-700"
+          className="flex-1 cursor-pointer rounded-full bg-green-600 py-4 font-semibold text-white transition hover:bg-green-700"
         >
           Add To Cart
         </button>
 
         <button
           onClick={onWishlist}
-          className="flex h-14 w-14 items-center justify-center rounded-full bg-green-100 text-green-600 transition hover:bg-green-600 hover:text-white"
+          className="flex h-14 w-14 cursor-pointer items-center justify-center rounded-full bg-green-100 text-green-600 transition hover:bg-green-600 hover:text-white"
         >
-          {/* <Heart size={22} /> */}
+          <Heart size={22} />
         </button>
 
       </div>
@@ -127,16 +126,16 @@ const ProductInfo = ({
 
         <div className="flex gap-3">
 
-          <button className="rounded-full border p-3 hover:bg-green-600 hover:text-white">
-            {/* <Facebook size={18} /> */}
+          <button className="rounded-full cursor-pointer border p-3 hover:bg-green-600 hover:text-white">
+            <FaFacebookF />
           </button>
 
-          <button className="rounded-full border p-3 hover:bg-green-600 hover:text-white">
-            {/* <Twitter size={18} /> */}
+          <button className="rounded-full cursor-pointer border p-3 hover:bg-green-600 hover:text-white">
+            <BsTwitter />
           </button>
 
-          <button className="rounded-full border p-3 hover:bg-green-600 hover:text-white">
-            {/* <Instagram size={18} /> */}
+          <button className="rounded-full cursor-pointer border p-3 hover:bg-green-600 hover:text-white">
+            <FaInstagram />
           </button>
 
         </div>

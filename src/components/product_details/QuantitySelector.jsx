@@ -37,7 +37,7 @@ const QuantitySelector = ({
       <button
         onClick={handleDecrease}
         disabled={quantity <= min}
-        className="flex h-10 w-10 items-center justify-center rounded-full bg-gray-100 transition hover:bg-green-600 hover:text-white disabled:cursor-not-allowed disabled:opacity-50"
+        className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-full bg-gray-100 transition hover:bg-green-600 hover:text-white disabled:cursor-not-allowed disabled:opacity-50"
       >
         <Minus size={18} />
       </button>
@@ -53,7 +53,7 @@ const QuantitySelector = ({
       <button
         onClick={handleIncrease}
         disabled={quantity >= max}
-        className="flex h-10 w-10 items-center justify-center rounded-full bg-gray-100 transition hover:bg-green-600 hover:text-white disabled:cursor-not-allowed disabled:opacity-50"
+        className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-full bg-gray-100 transition hover:bg-green-600 hover:text-white disabled:cursor-not-allowed disabled:opacity-50"
       >
         <Plus size={18} />
       </button>
