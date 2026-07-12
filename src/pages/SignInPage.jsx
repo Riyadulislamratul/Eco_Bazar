@@ -117,11 +117,14 @@ export default function SignIn() {
               </button>
             </form>
 
-            <p className="text-center text-sm mt-8 text-gray-600">
-              Don't have account?
-              <button className="font-semibold ml-1 hover:text-green-600">
-                Register
-              </button>
+            <p className="mt-8 text-center text-sm text-gray-600">
+              Don't have an account?
+              <Link
+                to="/create-account"
+                className="ml-1 font-semibold hover:text-green-600"
+              >
+                Create Account
+              </Link>
             </p>
           </div>
         </div>
