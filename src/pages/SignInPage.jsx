@@ -16,18 +16,48 @@ export default function SignIn() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const { login } = useAuth();
+  const { login, logout } = useAuth();
   const handleLogin = async (e) => {
     e.preventDefault();
 
     setError("");
 
     try {
-      await login(email, password);
+      const result = await login(email, password);
+
+      // Check email verification
+      if (!result.user.emailVerified) {
+        await logout();
+
+        setError(
+          "Please verify your email before signing in. Check your inbox or spam folder.",
+        );
+
+        return;
+      }
 
       navigate(from, { replace: true });
     } catch (err) {
-      setError(err.message);
+      switch (err.code) {
+        case "auth/invalid-credential":
+          setError("Invalid email or password.");
+          break;
+
+        case "auth/user-not-found":
+          setError("No account found with this email.");
+          break;
+
+        case "auth/wrong-password":
+          setError("Incorrect password.");
+          break;
+
+        case "auth/too-many-requests":
+          setError("Too many login attempts. Please try again later.");
+          break;
+
+        default:
+          setError("Something went wrong. Please try again.");
+      }
     }
   };
 
@@ -104,11 +134,18 @@ export default function SignIn() {
                   Remember me
                 </label>
 
-                <button className="text-gray-500 hover:text-green-600">
-                  Forget Password
+                <button
+                  type="button"
+                  className="text-gray-500 hover:text-green-600"
+                >
+                  Forgot Password?
                 </button>
               </div>
-              {error && <p className="text-sm text-red-500">{error}</p>}
+              {error && (
+                <div className="rounded-md border border-red-200 bg-red-50 p-3">
+                  <p className="text-sm text-red-600">{error}</p>
+                </div>
+              )}
               <button
                 type="submit"
                 className="w-full rounded-full bg-green-600 py-3 font-semibold text-white hover:bg-green-700 duration-300"

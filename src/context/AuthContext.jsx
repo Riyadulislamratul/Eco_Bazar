@@ -27,7 +27,8 @@ const AuthProvider = ({ children }) => {
 
   const [loading, setLoading] = useState(true);
 
-  // Register
+  // ================= Register =================
+
   const createUser = (email, password) => {
     setLoading(true);
 
@@ -38,7 +39,8 @@ const AuthProvider = ({ children }) => {
     );
   };
 
-  // Login
+  // ================= Login =================
+
   const login = (email, password) => {
     setLoading(true);
 
@@ -49,7 +51,8 @@ const AuthProvider = ({ children }) => {
     );
   };
 
-  // Google Login
+  // ================= Google Login =================
+
   const googleLogin = () => {
     setLoading(true);
 
@@ -59,14 +62,16 @@ const AuthProvider = ({ children }) => {
     );
   };
 
-  // Logout
+  // ================= Logout =================
+
   const logout = () => {
     setLoading(true);
 
     return signOut(auth);
   };
 
-  // Reset Password
+  // ================= Reset Password =================
+
   const resetPassword = (email) => {
     return sendPasswordResetEmail(
       auth,
@@ -74,14 +79,14 @@ const AuthProvider = ({ children }) => {
     );
   };
 
-  // Email Verification
+  // ================= Email Verification =================
+
   const verifyEmail = () => {
-    return sendEmailVerification(
-      auth.currentUser
-    );
+    return sendEmailVerification(auth.currentUser);
   };
 
-  // Update Profile
+  // ================= Update Profile =================
+
   const updateUserProfile = (userInfo) => {
     return updateProfile(
       auth.currentUser,
@@ -89,7 +94,8 @@ const AuthProvider = ({ children }) => {
     );
   };
 
-  // Observer
+  // ================= Auth Observer =================
+
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(
       auth,
@@ -99,7 +105,7 @@ const AuthProvider = ({ children }) => {
       }
     );
 
-    return unsubscribe;
+    return () => unsubscribe();
   }, []);
 
   const authInfo = {
@@ -107,11 +113,12 @@ const AuthProvider = ({ children }) => {
     loading,
 
     createUser,
+
     login,
 
-    googleLogin,
-
     logout,
+
+    googleLogin,
 
     resetPassword,
 
