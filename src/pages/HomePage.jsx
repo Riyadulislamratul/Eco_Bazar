@@ -1,16 +1,21 @@
-import React from 'react'
-import Hero from '../components/Hero'
-import FeatureBar from '../components/FeatureBar'
-import PopularCategories from '../components/PopularCategories'
+import React from "react";
+import Hero from "../components/Hero";
+import FeatureBar from "../components/FeatureBar";
+import PopularCategories from "../components/PopularCategories";
+import useAuth from "../hooks/useAuth";
 
 const HomePage = () => {
+  const { user } = useAuth();
+
+  console.log(user);
+
   return (
     <>
-    <Hero />
-    <FeatureBar />
-    <PopularCategories />
+      <Hero />
+      <FeatureBar />
+      <PopularCategories />
     </>
-  )
-}
+  );
+};
 
-export default HomePage
+export default HomePage;
