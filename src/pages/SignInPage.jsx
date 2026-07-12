@@ -143,7 +143,7 @@ export default function SignIn() {
               </div>
               {error && (
                 <div className="rounded-md border border-red-200 bg-red-50 p-3">
-                  <p className="text-sm text-red-600">{error}</p>
+                  <p className="text-sm text-red-500">{error}</p>
                 </div>
               )}
               <button
