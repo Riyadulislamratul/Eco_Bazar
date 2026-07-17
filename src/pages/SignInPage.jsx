@@ -134,12 +134,12 @@ export default function SignIn() {
                   Remember me
                 </label>
 
-                <button
-                  type="button"
+                <Link
+                  to="/forgot-password"
                   className="text-gray-500 hover:text-green-600"
                 >
                   Forgot Password?
-                </button>
+                </Link>
               </div>
               {error && (
                 <div className="rounded-md border border-red-200 bg-red-50 p-3">
