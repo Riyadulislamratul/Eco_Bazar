@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 
 import useAuth from "../hooks/useAuth";
+import { LayoutDashboard } from "lucide-react";
 
 const UserDropdown = () => {
   const { user, logout } = useAuth();
@@ -73,6 +74,15 @@ const UserDropdown = () => {
         <div className="border-b p-5">
           <p className="font-semibold text-lg">{user.displayName || "User"}</p>
         </div>
+
+        <Link
+  to="/dashboard"
+  onClick={() => setOpen(false)}
+  className="flex items-center gap-3 px-5 py-3 transition-colors hover:bg-green-50 hover:text-green-600"
+>
+  <LayoutDashboard size={18} />
+  Dashboard
+</Link>
 
         <Link
           to="/wishlist"

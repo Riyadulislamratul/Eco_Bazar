@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Home, ChevronRight, Eye, EyeOff } from "lucide-react";
 import { FcGoogle } from "react-icons/fc";
 import useAuth from "../hooks/useAuth";
+import toast from "react-hot-toast";
 
 import { useNavigate } from "react-router-dom";
 
@@ -69,7 +70,9 @@ const CreateAccountPage = () => {
 
         await verifyEmail();
 
-        console.log("Verification email sent!");
+        toast.success("Account created successfully!");
+
+        toast("Verification email has been sent.");
 
         navigate("/signin");
       } catch (error) {

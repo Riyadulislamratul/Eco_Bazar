@@ -4,6 +4,7 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import { Home, ChevronRight, Eye, EyeOff } from "lucide-react";
 import { FcGoogle } from "react-icons/fc";
+import toast from "react-hot-toast";
 
 // import your banner image
 // import Banner from "../assets/breadcrumb.jpg";
