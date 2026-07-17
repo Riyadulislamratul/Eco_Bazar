@@ -14,6 +14,7 @@ import OrderSuccess from "./pages/OrderSuccess";
 import FaqPage from "./pages/FaqPage";
 import CreateAccountPage from "./pages/CreateAccountPage";
 import ForgotPassword from "./pages/ForgotPassword";
+import ProtectedRoute from "./routes/ProtectedRoute";
 
 const router = createBrowserRouter([
   {
@@ -49,16 +50,24 @@ const router = createBrowserRouter([
         element: <ProductDetails />,
       },
       {
-        path: "wishlist",
-        element: <Wishlist />,
+        path: "/wishlist",
+        element: (
+          <ProtectedRoute>
+            <Wishlist />
+          </ProtectedRoute>
+        ),
       },
       {
         path: "cart",
         element: <Cart />,
       },
       {
-        path: "checkout",
-        element: <Checkout />,
+        path: "/checkout",
+        element: (
+          <ProtectedRoute>
+            <Checkout />
+          </ProtectedRoute>
+        ),
       },
       {
         path: "order-success",

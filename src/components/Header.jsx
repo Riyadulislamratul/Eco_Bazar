@@ -13,6 +13,8 @@ import {
 import Dropdown from "./Dropdown";
 import { useWishlist } from "../context/WishlistContext";
 import { useCart } from "../context/CartContext";
+import useAuth from "../hooks/useAuth";
+import UserDropdown from "./UserDropdown";
 
 const navMenus = [
   // {
@@ -50,6 +52,7 @@ export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { wishlistCount } = useWishlist();
   const { cartCount, cartTotal } = useCart();
+  const { user, logout } = useAuth();
 
   return (
     <header className="w-full">
@@ -80,18 +83,22 @@ export default function Header() {
             <div className="hidden h-4 w-px bg-gray-300 md:block" />
 
             <div className="flex items-center gap-2">
-              <Link to="/login" className="font-semibold hover:text-green-600">
-                Sign In
-              </Link>
+              {!user ? (
+                <div className="flex items-center gap-4">
+                  <Link to="/signin" className="hover:text-green-600">
+                    Sign In
+                  </Link>
 
-              <span>/</span>
-
-              <Link
-                to="/register"
-                className="font-semibold hover:text-green-600"
-              >
-                Sign Up
-              </Link>
+                  <Link
+                    to="/create-account"
+                    className="rounded-full bg-green-600 px-5 py-2 text-white hover:bg-green-700"
+                  >
+                    Create Account
+                  </Link>
+                </div>
+              ) : (
+               <UserDropdown />
+              )}
             </div>
           </div>
         </div>
@@ -170,8 +177,6 @@ export default function Header() {
                   <p className="font-semibold">${cartTotal.toFixed(2)}</p>
                 </div>
               </Link>
-
-              
             </div>
           </div>
         </div>
