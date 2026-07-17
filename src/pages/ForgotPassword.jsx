@@ -1,9 +1,49 @@
 import { useState } from "react";
+import useAuth from "../hooks/useAuth";
 import { Link } from "react-router-dom";
 import { Home, ChevronRight } from "lucide-react";
 
 export default function ForgotPassword() {
   const [email, setEmail] = useState("");
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
+
+  const { resetPassword } = useAuth();
+
+  const handleResetPassword = async (e) => {
+    e.preventDefault();
+
+    setError("");
+    setSuccess("");
+
+    if (!email) {
+      setError("Please enter your email address.");
+      return;
+    }
+
+    try {
+      await resetPassword(email);
+
+      setSuccess(
+        "Password reset email sent successfully. Please check your inbox or spam folder.",
+      );
+
+      setEmail("");
+    } catch (err) {
+      switch (err.code) {
+        case "auth/user-not-found":
+          setError("No account found with this email.");
+          break;
+
+        case "auth/invalid-email":
+          setError("Please enter a valid email address.");
+          break;
+
+        default:
+          setError("Something went wrong. Please try again.");
+      }
+    }
+  };
 
   return (
     <div className="bg-white">
@@ -21,19 +61,11 @@ export default function ForgotPassword() {
             <div className="flex items-center gap-2 text-sm">
               <Home size={15} className="text-white" />
 
-              <ChevronRight
-                size={14}
-                className="text-gray-300"
-              />
+              <ChevronRight size={14} className="text-gray-300" />
 
-              <span className="text-gray-200">
-                Account
-              </span>
+              <span className="text-gray-200">Account</span>
 
-              <ChevronRight
-                size={14}
-                className="text-gray-300"
-              />
+              <ChevronRight size={14} className="text-gray-300" />
 
               <span className="font-medium text-green-500">
                 Forgot Password
@@ -52,21 +84,29 @@ export default function ForgotPassword() {
           </h2>
 
           <p className="mb-8 text-center text-gray-500">
-            Enter your email address and we'll send
-            you a password reset link.
+            Enter your email address and we'll send you a password reset link.
           </p>
 
-          <form className="space-y-5">
+          <form onSubmit={handleResetPassword} className="space-y-5">
             <input
               type="email"
               placeholder="Email Address"
               value={email}
-              onChange={(e) =>
-                setEmail(e.target.value)
-              }
+              onChange={(e) => setEmail(e.target.value)}
               required
               className="w-full rounded-md border px-4 py-3 outline-none focus:border-green-500"
             />
+            {error && (
+              <div className="rounded-md border border-red-200 bg-red-50 p-3">
+                <p className="text-sm text-red-600">{error}</p>
+              </div>
+            )}
+
+            {success && (
+              <div className="rounded-md border border-green-200 bg-green-50 p-3">
+                <p className="text-sm text-green-600">{success}</p>
+              </div>
+            )}
 
             <button
               type="submit"
@@ -78,7 +118,6 @@ export default function ForgotPassword() {
 
           <p className="mt-8 text-center text-sm text-gray-600">
             Remember your password?
-
             <Link
               to="/signin"
               className="ml-1 font-semibold hover:text-green-600"
