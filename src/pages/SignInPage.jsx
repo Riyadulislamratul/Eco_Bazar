@@ -3,6 +3,7 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
 
 import useAuth from "../hooks/useAuth";
 import { Home, ChevronRight, Eye, EyeOff } from "lucide-react";
+import { FcGoogle } from "react-icons/fc";
 
 // import your banner image
 // import Banner from "../assets/breadcrumb.jpg";
@@ -16,7 +17,7 @@ export default function SignIn() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const { login, logout } = useAuth();
+const { login, logout, googleLogin } = useAuth();
   const handleLogin = async (e) => {
     e.preventDefault();
 
@@ -60,6 +61,19 @@ export default function SignIn() {
       }
     }
   };
+  const handleGoogleLogin = async () => {
+  setError("");
+
+  try {
+    await googleLogin();
+
+    navigate(from, {
+      replace: true,
+    });
+  } catch (err) {
+    setError(err.message);
+  }
+};
 
   const from = location.state?.from?.pathname || "/";
 
@@ -152,6 +166,25 @@ export default function SignIn() {
               >
                 Login
               </button>
+              <div className="my-6 flex items-center">
+  <div className="h-px flex-1 bg-gray-300"></div>
+
+  <span className="mx-4 text-sm text-gray-500">
+    OR
+  </span>
+
+  <div className="h-px flex-1 bg-gray-300"></div>
+</div>
+
+<button
+  type="button"
+  onClick={handleGoogleLogin}
+  className="flex w-full items-center justify-center gap-3 rounded-full border border-gray-300 py-3 font-semibold transition hover:border-green-500 hover:bg-green-50"
+>
+  <FcGoogle size={24} />
+
+  Continue with Google
+</button>
             </form>
 
             <p className="mt-8 text-center text-sm text-gray-600">

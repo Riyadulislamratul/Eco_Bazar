@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Home, ChevronRight, Eye, EyeOff } from "lucide-react";
+import { FcGoogle } from "react-icons/fc";
 import useAuth from "../hooks/useAuth";
 
 import { useNavigate } from "react-router-dom";
@@ -28,6 +29,7 @@ const CreateAccountPage = () => {
   const [error, setError] = useState("");
 
   const [success, setSuccess] = useState("");
+  const { googleLogin } = useAuth();
 
   const handleCreateAccount = async (e) => {
     e.preventDefault();
@@ -76,6 +78,15 @@ const CreateAccountPage = () => {
       }
     } catch (error) {
       setError(error.message);
+    }
+  };
+  const handleGoogleSignup = async () => {
+    try {
+      await googleLogin();
+
+      navigate("/");
+    } catch (err) {
+      setError("Google sign-in failed. Please try again.");
     }
   };
 
@@ -203,6 +214,22 @@ const CreateAccountPage = () => {
                 className="w-full rounded-full bg-green-600 py-3 font-semibold text-white transition hover:bg-green-700"
               >
                 Create Account
+              </button>
+              <div className="my-6 flex items-center">
+                <div className="h-px flex-1 bg-gray-300"></div>
+
+                <span className="mx-4 text-sm text-gray-500">OR</span>
+
+                <div className="h-px flex-1 bg-gray-300"></div>
+              </div>
+
+              <button
+                type="button"
+                onClick={handleGoogleSignup}
+                className="flex w-full items-center justify-center gap-3 rounded-full border border-gray-300 py-3 font-semibold transition hover:border-green-500 hover:bg-green-50"
+              >
+                <FcGoogle size={24} />
+                Continue with Google
               </button>
             </form>
 
