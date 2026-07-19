@@ -3,6 +3,7 @@ import Hero from "../components/Hero";
 import FeatureBar from "../components/FeatureBar";
 import PopularCategories from "../components/PopularCategories";
 import useAuth from "../hooks/useAuth";
+import Testimonials from "../components/Testimonials";
 
 const HomePage = () => {
   const { user } = useAuth();
@@ -14,6 +15,7 @@ const HomePage = () => {
       <Hero />
       <FeatureBar />
       <PopularCategories />
+      <Testimonials />
     </>
   );
 };

@@ -1,9 +1,14 @@
 import { Mail, BadgeCheck, ShieldAlert } from "lucide-react";
 
+import { useState } from "react";
+import EditProfileModal from "./EditProfileModal";
+
 import useAuth from "../../hooks/useAuth";
 
 const ProfileCard = () => {
   const { user } = useAuth();
+  const [openModal, setOpenModal] =
+  useState(false);
 
   return (
     <div className="rounded-xl border bg-white p-8 shadow-sm transition hover:shadow-md">
@@ -41,10 +46,17 @@ const ProfileCard = () => {
           </div>
         )}
 
-        <button className="mt-8 rounded-full bg-green-600 px-8 py-3 font-semibold text-white transition hover:bg-green-700">
-          Edit Profile
-        </button>
+        <button
+  onClick={() => setOpenModal(true)}
+  className="mt-8 rounded-full bg-green-600 px-8 py-3 font-semibold text-white transition hover:bg-green-700"
+>
+  Edit Profile
+</button>
       </div>
+      <EditProfileModal
+  open={openModal}
+  onClose={() => setOpenModal(false)}
+/>
     </div>
   );
 };
