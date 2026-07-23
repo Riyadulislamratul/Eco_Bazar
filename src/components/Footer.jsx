@@ -4,34 +4,46 @@ import Visa from "../assets/icons/visa.png";
 import Mastercard from "../assets/icons/mastercard.png";
 import Discover from "../assets/icons/discover.png";
 import SecurePayment from "../assets/icons/securepayment.png";
+import { CiFacebook, CiLinkedin, CiTwitter, CiInstagram } from "react-icons/ci";
 
 const Footer = () => {
   return (
     <footer>
-      <div className="container mx-auto px-6 py-10">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-          <div className="flex flex-col gap-3">
-            <h3 className="text-2xl font-semibold text-[#1A1A1A]">Subcribe our Newsletter</h3>
-            <p className="text-[#999999] text-sm">
-              Pellentesque eu nibh eget mauris congue mattis mattis nec tellus.
-              Phasellus imperdiet elit eu magna.
-            </p>
-          </div>
-          <div className="ro">
-            <form className="flex items-center">
-              <input
-                type="email"
-                placeholder="Enter your email"
-                className="px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500"
-              />
-              <button
-                type="submit"
-                className="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700 transition duration-300"
-                >Subscribe</button>
-            </form>
+      <section className="bg-gray-100 py-12">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="grid lg:grid-cols-2 gap-10 items-center">
+            <div>
+              <h2 className="text-3xl font-bold">Subscribe our Newsletter</h2>
+
+              <p className="text-gray-500 mt-3 max-w-md">
+                Pellentesque eu nibh eget mauris congue mattis mattis nec
+                tellus. Phasellus imperdiet elit eu magna.
+              </p>
+            </div>
+
+            <div className="flex flex-col lg:flex-row items-center gap-6">
+              <div className="flex flex-1 w-full">
+                <input
+                  type="email"
+                  placeholder="Your email address"
+                  className="flex-1 rounded-l-full px-6 py-4 border border-gray-300 outline-none bg-white"
+                />
+
+                <button className="bg-green-600 text-white px-10 rounded-r-full font-semibold hover:bg-green-700 ">
+                  Subscribe
+                </button>
+              </div>
+
+              <div className="flex gap-4">
+                <button className="hover:bg-green-600 rounded-full text-[#4D4D4D] hover:text-white cursor-pointer transition-all duration-300 flex justify-center items-center size-10"><CiFacebook size={30} /></button>
+                <button className="hover:bg-green-600 rounded-full text-[#4D4D4D] hover:text-white cursor-pointer transition-all duration-300 flex justify-center items-center size-10"><CiInstagram size={30} /></button>
+                <button className="hover:bg-green-600 rounded-full text-[#4D4D4D] hover:text-white cursor-pointer transition-all duration-300 flex justify-center items-center size-10"><CiTwitter size={30} /></button>
+                <button className="hover:bg-green-600 rounded-full text-[#4D4D4D] hover:text-white cursor-pointer transition-all duration-300 flex justify-center items-center size-10"><CiLinkedin size={30} /></button>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
+      </section>
       <div className="bg-[#111111] text-white">
         <div className="container mx-auto px-6">
           {/* Top Section */}
