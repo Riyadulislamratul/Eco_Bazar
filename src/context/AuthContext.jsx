@@ -108,6 +108,17 @@ const AuthProvider = ({ children }) => {
     return () => unsubscribe();
   }, []);
 
+
+
+  const refreshUser = async () => {
+  if (!auth.currentUser) return;
+
+  await auth.currentUser.reload();
+
+  setUser({
+    ...auth.currentUser,
+  });
+};
   const authInfo = {
     user,
     loading,
@@ -121,6 +132,8 @@ const AuthProvider = ({ children }) => {
     googleLogin,
 
     resetPassword,
+
+    refreshUser,
 
     verifyEmail,
 
