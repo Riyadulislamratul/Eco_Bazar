@@ -27,8 +27,21 @@ const EditProfileModal = ({ open, onClose }) => {
 
     if (!file) return;
 
-    setSelectedImage(file);
+    // Maximum 2MB
+    if (file.size > 2 * 1024 * 1024) {
+      toast.error("Image must be less than 2MB.");
+      return;
+    }
 
+    // Allowed image types
+    const allowedTypes = ["image/jpeg", "image/jpg", "image/png", "image/webp"];
+
+    if (!allowedTypes.includes(file.type)) {
+      toast.error("Only JPG, JPEG, PNG and WEBP images are allowed.");
+      return;
+    }
+
+    setSelectedImage(file);
     setPreview(URL.createObjectURL(file));
   };
 
@@ -41,16 +54,26 @@ const EditProfileModal = ({ open, onClose }) => {
       let photoURL = user.photoURL;
 
       if (selectedImage) {
+        toast.loading("Uploading image...", {
+          id: "upload",
+        });
+
         photoURL = await imageUpload(selectedImage);
+
+        toast.success("Image uploaded!", {
+          id: "upload",
+        });
       }
 
       await updateUserProfile({
         displayName: name,
         photoURL,
       });
-      await refreshUser();
 
-      toast.success("Profile updated successfully!");
+      await refreshUser();
+      setSelectedImage(null);
+
+      toast.success("Profile updated!");
 
       onClose();
     } catch (error) {
@@ -92,17 +115,27 @@ const EditProfileModal = ({ open, onClose }) => {
 
             <div className="flex flex-col items-center gap-4">
               <img
-                src={preview || "https://ui-avatars.com/api/?name=User"}
-                alt="Preview"
-                className="h-28 w-28 rounded-full border-4 border-green-500 object-cover"
-              />
+  src={
+    preview ||
+    "https://ui-avatars.com/api/?name=User"
+  }
+  alt="Preview"
+  className="h-28 w-28 rounded-full border-4 border-green-500 object-cover transition-all duration-300 hover:scale-105"
+/>
 
-              <label className="cursor-pointer rounded-full bg-green-600 px-6 py-2 text-white transition hover:bg-green-700">
+              <label
+                className={`rounded-full px-6 py-2 text-white transition ${
+                  loading
+                    ? "cursor-not-allowed bg-gray-400"
+                    : "cursor-pointer bg-green-600 hover:bg-green-700"
+                }`}
+              >
                 Choose Image
                 <input
                   type="file"
-                  accept="image/*"
                   hidden
+                  disabled={loading}
+                  accept="image/*"
                   onChange={handleImageChange}
                 />
               </label>
@@ -110,8 +143,9 @@ const EditProfileModal = ({ open, onClose }) => {
           </div>
 
           <button
+            type="submit"
             disabled={loading}
-            className="w-full rounded-full bg-green-600 py-3 font-semibold text-white hover:bg-green-700 disabled:opacity-60"
+            className="w-full rounded-full bg-green-600 py-3 font-semibold text-white transition hover:bg-green-700 disabled:cursor-not-allowed disabled:opacity-60"
           >
             {loading ? "Saving..." : "Save Changes"}
           </button>
