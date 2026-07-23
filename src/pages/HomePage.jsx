@@ -5,6 +5,7 @@ import PopularCategories from "../components/PopularCategories";
 import useAuth from "../hooks/useAuth";
 import Testimonials from "../components/Testimonials";
 import BrandSlider from "../components/BrandSlider";
+import InstagramGallery from "../components/InstagramGallery";
 
 const HomePage = () => {
   const { user } = useAuth();
@@ -18,6 +19,7 @@ const HomePage = () => {
       <PopularCategories />
       <Testimonials />
       <BrandSlider />
+      <InstagramGallery />
     </>
   );
 };

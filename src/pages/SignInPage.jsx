@@ -18,7 +18,7 @@ export default function SignIn() {
   const navigate = useNavigate();
   const location = useLocation();
 
-const { login, logout, googleLogin } = useAuth();
+  const { login, logout, googleLogin } = useAuth();
   const handleLogin = async (e) => {
     e.preventDefault();
 
@@ -63,18 +63,18 @@ const { login, logout, googleLogin } = useAuth();
     }
   };
   const handleGoogleLogin = async () => {
-  setError("");
+    setError("");
 
-  try {
-    await googleLogin();
+    try {
+      await googleLogin();
 
-    navigate(from, {
-      replace: true,
-    });
-  } catch (err) {
-    setError(err.message);
-  }
-};
+      navigate(from, {
+        replace: true,
+      });
+    } catch (err) {
+      setError(err.message);
+    }
+  };
 
   const from = location.state?.from?.pathname || "/";
 
@@ -168,24 +168,21 @@ const { login, logout, googleLogin } = useAuth();
                 Login
               </button>
               <div className="my-6 flex items-center">
-  <div className="h-px flex-1 bg-gray-300"></div>
+                <div className="h-px flex-1 bg-gray-300"></div>
 
-  <span className="mx-4 text-sm text-gray-500">
-    OR
-  </span>
+                <span className="mx-4 text-sm text-gray-500">OR</span>
 
-  <div className="h-px flex-1 bg-gray-300"></div>
-</div>
+                <div className="h-px flex-1 bg-gray-300"></div>
+              </div>
 
-<button
-  type="button"
-  onClick={handleGoogleLogin}
-  className="flex w-full items-center justify-center gap-3 rounded-full border border-gray-300 py-3 font-semibold transition hover:border-green-500 hover:bg-green-50"
->
-  <FcGoogle size={24} />
-
-  Continue with Google
-</button>
+              <button
+                type="button"
+                onClick={handleGoogleLogin}
+                className="flex w-full items-center justify-center gap-3 rounded-full border border-gray-300 py-3 font-semibold transition hover:border-green-500 hover:bg-green-50"
+              >
+                <FcGoogle size={24} />
+                Continue with Google
+              </button>
             </form>
 
             <p className="mt-8 text-center text-sm text-gray-600">
@@ -203,44 +200,7 @@ const { login, logout, googleLogin } = useAuth();
 
       {/* ================= Newsletter ================= */}
 
-      <section className="bg-gray-100 py-12">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="grid lg:grid-cols-2 gap-10 items-center">
-            <div>
-              <h2 className="text-3xl font-bold">Subscribe our Newsletter</h2>
-
-              <p className="text-gray-500 mt-3 max-w-md">
-                Pellentesque eu nibh eget mauris congue mattis mattis nec
-                tellus. Phasellus imperdiet elit eu magna.
-              </p>
-            </div>
-
-            <div className="flex flex-col lg:flex-row items-center gap-6">
-              <div className="flex flex-1 w-full">
-                <input
-                  type="email"
-                  placeholder="Your email address"
-                  className="flex-1 rounded-l-full px-6 py-4 border outline-none"
-                />
-
-                <button className="bg-green-600 text-white px-10 rounded-r-full font-semibold hover:bg-green-700">
-                  Subscribe
-                </button>
-              </div>
-
-              <div className="flex gap-4">
-                <button className="w-10 h-10 rounded-full bg-green-600 text-white flex items-center justify-center"></button>
-
-                <button className="hover:text-green-600"></button>
-
-                <button className="hover:text-green-600"></button>
-
-                <button className="hover:text-green-600"></button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      
     </div>
   );
 }
