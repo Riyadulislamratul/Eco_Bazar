@@ -4,6 +4,7 @@ import FeatureBar from "../components/FeatureBar";
 import PopularCategories from "../components/PopularCategories";
 import useAuth from "../hooks/useAuth";
 import Testimonials from "../components/Testimonials";
+import BrandSlider from "../components/BrandSlider";
 
 const HomePage = () => {
   const { user } = useAuth();
@@ -16,6 +17,7 @@ const HomePage = () => {
       <FeatureBar />
       <PopularCategories />
       <Testimonials />
+      <BrandSlider />
     </>
   );
 };
