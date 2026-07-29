@@ -6,6 +6,7 @@ import useAuth from "../hooks/useAuth";
 import Testimonials from "../components/Testimonials";
 import BrandSlider from "../components/BrandSlider";
 import InstagramGallery from "../components/InstagramGallery";
+import DiscountBanner from "../components/DiscountBanner";
 
 const HomePage = () => {
   const { user } = useAuth();
@@ -17,6 +18,7 @@ const HomePage = () => {
       <Hero />
       <FeatureBar />
       <PopularCategories />
+      <DiscountBanner />
       <Testimonials />
       <BrandSlider />
       <InstagramGallery />
