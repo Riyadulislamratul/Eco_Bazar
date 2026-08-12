@@ -5,10 +5,6 @@ import {
 } from "react";
 
 
-import {
-  EmailAuthProvider,
-  reauthenticateWithCredential,
-} from "firebase/auth";
 
 
 import {
@@ -17,10 +13,13 @@ import {
   signOut,
   GoogleAuthProvider,
   signInWithPopup,
+  reauthenticateWithPopup,
   onAuthStateChanged,
   updateProfile,
   sendPasswordResetEmail,
   sendEmailVerification,
+   EmailAuthProvider,
+  reauthenticateWithCredential,
 } from "firebase/auth";
 
 import { auth } from "../firebase/firebase.config";
@@ -142,6 +141,18 @@ const AuthProvider = ({ children }) => {
     ...auth.currentUser,
   });
 };
+ const reauthenticateGoogle = () => {
+  if (!auth.currentUser) {
+    throw new Error("No authenticated user found.");
+  }
+
+  const provider = new GoogleAuthProvider();
+
+  return reauthenticateWithPopup(
+    auth.currentUser,
+    provider
+  );
+};
   const authInfo = {
     user,
     loading,
@@ -163,6 +174,8 @@ const AuthProvider = ({ children }) => {
     updateUserProfile,
 
     reauthenticateUser,
+
+    reauthenticateGoogle,
   };
 
   return (
