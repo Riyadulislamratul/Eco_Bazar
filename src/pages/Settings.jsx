@@ -78,52 +78,65 @@ const Settings = () => {
   // -----------------------------
   // Delete account
   // -----------------------------
-  const handleDeleteAccount = async () => {
-    if (!user) return;
+ const handleDeleteAccount = async () => {
+  if (!user) return;
 
-    try {
-      setDeleting(true);
+  try {
+    setDeleting(true);
 
-      const isGoogleUser = user.providerData.some(
-        (provider) => provider.providerId === "google.com",
-      );
-
-      if (isGoogleUser) {
-        await reauthenticateGoogle();
-      } else {
-        await reauthenticateUser(deletePassword);
+    if (isGoogleUser) {
+      await reauthenticateGoogle();
+    } else {
+      if (!deletePassword) {
+        toast.error("Please enter your password.");
+        return;
       }
 
-      await user.delete();
-
-      toast.success("Your account has been deleted.");
-
-      setShowDeleteModal(false);
-
-      await logout();
-    } catch (error) {
-      console.error(error);
-
-      if (
-        error.code === "auth/wrong-password" ||
-        error.code === "auth/invalid-credential"
-      ) {
-        toast.error("Incorrect password.");
-      } else if (error.code === "auth/popup-closed-by-user") {
-        toast.error("Google verification was cancelled.");
-      } else if (error.code === "auth/requires-recent-login") {
-        toast.error("Please sign in again and try again.");
-      } else {
-        toast.error(error.message);
-      }
-    } finally {
-      setDeleting(false);
+      await reauthenticateUser(deletePassword);
     }
-  };
+
+    await user.delete();
+
+    toast.success("Your account has been deleted.");
+
+    setShowDeleteModal(false);
+
+    await logout();
+  } catch (error) {
+    console.error(error);
+
+    if (
+      error.code === "auth/wrong-password" ||
+      error.code === "auth/invalid-credential"
+    ) {
+      toast.error("Incorrect password.");
+    } else if (
+      error.code === "auth/popup-closed-by-user"
+    ) {
+      toast.error("Google verification was cancelled.");
+    } else if (
+      error.code === "auth/cancelled-popup-request"
+    ) {
+      toast.error("Google verification was cancelled.");
+    } else if (
+      error.code === "auth/requires-recent-login"
+    ) {
+      toast.error(
+        "Please sign in again and try again."
+      );
+    } else {
+      toast.error(error.message);
+    }
+  } finally {
+    setDeleting(false);
+  }
+};
   const isGoogleUser = user?.providerData?.some(
     (provider) => provider.providerId === "google.com",
   );
-
+console.log("User:", user);
+console.log("Providers:", user?.providerData);
+console.log("Is Google User:", isGoogleUser);
   return (
     <DashboardLayout>
       <div className="space-y-6">
@@ -195,28 +208,7 @@ const Settings = () => {
 
         {/* Password */}
 
-        {isGoogleUser ? (
-          <div className="rounded-lg bg-blue-50 p-4">
-            <p className="text-sm text-blue-700">
-              You signed in with Google. Click "Delete Account" to verify your
-              Google account before deleting your EcoBazar account.
-            </p>
-          </div>
-        ) : (
-          <div>
-            <label className="mb-2 block text-sm font-medium">
-              Confirm your password
-            </label>
-
-            <input
-              type="password"
-              value={deletePassword}
-              onChange={(e) => setDeletePassword(e.target.value)}
-              placeholder="Enter your password"
-              className="w-full rounded-lg border px-4 py-3 outline-none transition focus:border-red-500"
-            />
-          </div>
-        )}
+    
 
         {/* Danger Zone */}
 
@@ -309,19 +301,33 @@ const Settings = () => {
                 </div>
               </div>
 
-              <div>
-                <label className="mb-2 block text-sm font-medium">
-                  Confirm your password
-                </label>
+             {isGoogleUser ? (
+  <div className="rounded-lg bg-blue-50 p-4">
+    <p className="font-semibold text-blue-800">
+      Google Account
+    </p>
 
-                <input
-                  type="password"
-                  value={deletePassword}
-                  onChange={(e) => setDeletePassword(e.target.value)}
-                  placeholder="Enter your password"
-                  className="w-full rounded-lg border px-4 py-3 outline-none transition focus:border-red-500"
-                />
-              </div>
+    <p className="mt-1 text-sm text-blue-700">
+      You signed in with Google. Click the button below
+      to verify your Google account before deleting your
+      EcoBazar account.
+    </p>
+  </div>
+) : (
+  <div>
+    <label className="mb-2 block text-sm font-medium">
+      Confirm your password
+    </label>
+
+    <input
+      type="password"
+      value={deletePassword}
+      onChange={(e) => setDeletePassword(e.target.value)}
+      placeholder="Enter your password"
+      className="w-full rounded-lg border px-4 py-3 outline-none transition focus:border-red-500"
+    />
+  </div>
+)}
 
               {/* Buttons */}
 
@@ -338,19 +344,29 @@ const Settings = () => {
                 </button>
 
                 <button
-                  type="button"
-                  onClick={handleDeleteAccount}
-                  disabled={deleting || (!isGoogleUser && !deletePassword)}
-                  className="flex-1 rounded-full bg-red-600 py-3 font-semibold text-white transition hover:bg-red-700 disabled:cursor-not-allowed disabled:opacity-50"
-                >
-                  {deleting ? "Deleting..." : "Delete Account"}
-                </button>
+  type="button"
+  onClick={handleDeleteAccount}
+  disabled={
+    deleting ||
+    (!isGoogleUser && !deletePassword)
+  }
+  className="flex-1 rounded-full bg-red-600 py-3 font-semibold text-white transition hover:bg-red-700 disabled:cursor-not-allowed disabled:opacity-50"
+>
+  {deleting
+    ? "Processing..."
+    : isGoogleUser
+    ? "Continue with Google"
+    : "Delete Account"}
+</button>
               </div>
             </div>
           </div>
         </div>
+        
       )}
+      
     </DashboardLayout>
+    
   );
 };
 
