@@ -4,6 +4,13 @@ import {
   useState,
 } from "react";
 
+
+import {
+  EmailAuthProvider,
+  reauthenticateWithCredential,
+} from "firebase/auth";
+
+
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
@@ -23,6 +30,22 @@ export const AuthContext = createContext();
 const googleProvider = new GoogleAuthProvider();
 
 const AuthProvider = ({ children }) => {
+
+  const reauthenticateUser = (password) => {
+  if (!auth.currentUser || !auth.currentUser.email) {
+    throw new Error("No authenticated user found.");
+  }
+
+  const credential = EmailAuthProvider.credential(
+    auth.currentUser.email,
+    password
+  );
+
+  return reauthenticateWithCredential(
+    auth.currentUser,
+    credential
+  );
+};
   const [user, setUser] = useState(null);
 
   const [loading, setLoading] = useState(true);
@@ -138,6 +161,8 @@ const AuthProvider = ({ children }) => {
     verifyEmail,
 
     updateUserProfile,
+
+    reauthenticateUser,
   };
 
   return (

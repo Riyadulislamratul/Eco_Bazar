@@ -30,7 +30,7 @@ const DiscountBanner = () => {
               money-back guarantee.
             </p>
 
-            <button className="group mt-8 inline-flex items-center gap-3 rounded-full bg-green-500 px-7 py-3 text-sm font-semibold text-white transition-all duration-300 hover:bg-green-600 hover:shadow-lg hover:shadow-green-500/30">
+            <button className="group mt-8 cursor-pointer inline-flex items-center gap-3 rounded-full bg-green-500 px-7 py-3 text-sm font-semibold text-white transition-all duration-300 hover:bg-green-600 hover:shadow-lg hover:shadow-green-500/30">
               Shop Now
 
               <ArrowRight

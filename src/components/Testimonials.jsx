@@ -63,7 +63,7 @@ export default function Testimonials() {
 
   return (
     <section className="bg-gray-100 py-24">
-      <div className="max-w-7xl mx-auto px-5">
+      <div className="container mx-auto px-5">
 
         {/* Header */}
 
@@ -107,6 +107,7 @@ export default function Testimonials() {
 
         <Swiper
           modules={[Navigation, Pagination, Autoplay]}
+          className=" py-10"
           spaceBetween={30}
           loop={true}
           speed={900}
@@ -148,7 +149,7 @@ export default function Testimonials() {
                 transition={{
                   duration: .3,
                 }}
-                className="group bg-white/90 backdrop-blur rounded-2xl p-8 shadow hover:shadow-2xl border border-transparent hover:border-green-500 transition-all duration-500 h-full"
+                className="group bg-white backdrop-blur rounded-2xl p-8 shadow hover:shadow-2xl border border-transparent hover:border-green-500 transition-all duration-500 h-full"
               >
                 {/* Quote */}
 
