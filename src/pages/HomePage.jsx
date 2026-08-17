@@ -7,6 +7,7 @@ import Testimonials from "../components/Testimonials";
 import BrandSlider from "../components/BrandSlider";
 import InstagramGallery from "../components/InstagramGallery";
 import DiscountBanner from "../components/DiscountBanner";
+import PopularProducts from "../components/PopularProducts";
 
 const HomePage = () => {
   const { user } = useAuth();
@@ -18,6 +19,7 @@ const HomePage = () => {
       <Hero />
       <FeatureBar />
       <PopularCategories />
+      <PopularProducts />
       <DiscountBanner />
       <Testimonials />
       <BrandSlider />
