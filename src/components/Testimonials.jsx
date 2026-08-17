@@ -107,7 +107,7 @@ export default function Testimonials() {
 
         <Swiper
           modules={[Navigation, Pagination, Autoplay]}
-          className=" py-10"
+          className="overflow-visible! py-10"
           spaceBetween={30}
           loop={true}
           speed={900}
@@ -149,7 +149,7 @@ export default function Testimonials() {
                 transition={{
                   duration: .3,
                 }}
-                className="group bg-white backdrop-blur rounded-2xl p-8 shadow hover:shadow-2xl border border-transparent hover:border-green-500 transition-all duration-500 h-full"
+                className="group cursor-pointer bg-white backdrop-blur rounded-2xl p-8 shadow hover:shadow-2xl border border-transparent hover:border-green-500 transition-all duration-500 h-full"
               >
                 {/* Quote */}
 
