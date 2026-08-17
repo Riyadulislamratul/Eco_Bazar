@@ -10,6 +10,7 @@ import DiscountBanner from "../components/DiscountBanner";
 import PopularProducts from "../components/PopularProducts";
 import PromoBanners from "../components/PromoBanners";
 import HotDeals from "../components/HotDeals";
+import LatestNews from "../components/LatestNews";
 
 const HomePage = () => {
   const { user } = useAuth();
@@ -25,6 +26,7 @@ const HomePage = () => {
       <PromoBanners />
       <HotDeals />
       <DiscountBanner />
+      <LatestNews />
       <Testimonials />
       <BrandSlider />
       <InstagramGallery />
