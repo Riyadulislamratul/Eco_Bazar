@@ -8,6 +8,7 @@ import BrandSlider from "../components/BrandSlider";
 import InstagramGallery from "../components/InstagramGallery";
 import DiscountBanner from "../components/DiscountBanner";
 import PopularProducts from "../components/PopularProducts";
+import PromoBanners from "../components/PromoBanners";
 
 const HomePage = () => {
   const { user } = useAuth();
@@ -20,6 +21,7 @@ const HomePage = () => {
       <FeatureBar />
       <PopularCategories />
       <PopularProducts />
+      <PromoBanners />
       <DiscountBanner />
       <Testimonials />
       <BrandSlider />
