@@ -89,7 +89,7 @@ const HotDeals = () => {
   };
 
   return (
-    <section className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
+    <section className="mx-auto container px-4 py-20 sm:px-6 lg:px-8">
 
       {/* =================================
           Header
@@ -97,13 +97,13 @@ const HotDeals = () => {
 
       <div className="mb-5 flex items-center justify-between">
 
-        <h2 className="text-2xl font-bold text-gray-900">
+        <h2 className="text-4xl font-bold text-gray-900">
           Hot Deals
         </h2>
 
         <Link
           to="/shop"
-          className="group flex items-center gap-1 text-sm font-medium text-green-600 transition hover:text-green-700 cursor-pointer"
+          className="group flex items-center gap-1 text-xl font-medium text-green-600 transition hover:text-green-700 cursor-pointer"
         >
           View All
 
@@ -137,12 +137,12 @@ const HotDeals = () => {
             <div className="absolute left-3 top-3 z-20 flex gap-1.5">
 
               {featuredProduct.discount && (
-                <span className="rounded-sm bg-red-500 px-2 py-1 text-[9px] font-medium text-white">
+                <span className="rounded-sm bg-red-500 px-2 py-1 text-[13px] font-medium text-white">
                   Sale {featuredProduct.discount}%
                 </span>
               )}
 
-              <span className="rounded-sm bg-blue-500 px-2 py-1 text-[9px] font-medium text-white">
+              <span className="rounded-sm bg-blue-500 px-2 py-1 text-[13px] font-medium text-white">
                 Best Deal
               </span>
 
@@ -174,7 +174,7 @@ const HotDeals = () => {
                 className="flex h-9 w-9 shrink-0 cursor-pointer items-center justify-center rounded-full border border-gray-200 bg-white text-gray-700 transition-all duration-300 hover:border-green-600 hover:bg-green-600 hover:text-white"
                 aria-label="Add to wishlist"
               >
-                <Heart size={16} />
+                <Heart size={22} />
               </button>
 
               <button
@@ -182,11 +182,11 @@ const HotDeals = () => {
                 onClick={() =>
                   handleAddToCart(featuredProduct)
                 }
-                className="flex h-9 flex-1 cursor-pointer items-center justify-center gap-2 rounded-full bg-green-600 text-xs font-medium text-white transition-all duration-300 hover:bg-green-700"
+                className="flex h-9 flex-1 cursor-pointer items-center justify-center gap-2 rounded-full bg-green-600 text-lg font-medium text-white transition-all duration-300 hover:bg-green-700"
               >
                 Add to Cart
 
-                <ShoppingBag size={14} />
+                <ShoppingBag size={20} />
               </button>
 
               <Link
@@ -194,7 +194,7 @@ const HotDeals = () => {
                 className="flex h-9 w-9 shrink-0 cursor-pointer items-center justify-center rounded-full border border-gray-200 bg-white text-gray-700 transition-all duration-300 hover:border-green-600 hover:bg-green-600 hover:text-white"
                 aria-label="View product"
               >
-                <Eye size={16} />
+                <Eye size={24} />
               </Link>
 
             </div>
@@ -207,21 +207,21 @@ const HotDeals = () => {
 
               <Link
                 to={`/product/${featuredProduct.slug}`}
-                className="text-sm font-medium text-gray-700 transition-colors hover:text-green-600"
+                className="text-lg font-medium text-gray-700 transition-colors hover:text-green-600"
               >
                 {featuredProduct.name}
               </Link>
 
               {/* Price */}
 
-              <div className="mt-1 flex items-center justify-center gap-2">
+              <div className="mt-4 flex items-center justify-center gap-2">
 
-                <span className="text-lg font-semibold text-gray-900">
+                <span className="text-xl font-semibold text-gray-900">
                   ${featuredProduct.price}
                 </span>
 
                 {featuredProduct.oldPrice && (
-                  <span className="text-sm text-gray-400 line-through">
+                  <span className="text-lg text-gray-400 line-through">
                     ${featuredProduct.oldPrice}
                   </span>
                 )}
@@ -230,20 +230,20 @@ const HotDeals = () => {
 
               {/* Rating */}
 
-              <div className="mt-1 flex items-center justify-center gap-1">
+              <div className="mt-3 flex items-center justify-center gap-1">
 
                 <div className="flex text-orange-400">
                   {[1, 2, 3, 4, 5].map((star) => (
                     <span
                       key={star}
-                      className="text-xs"
+                      className="text-lg"
                     >
                       ★
                     </span>
                   ))}
                 </div>
 
-                <span className="text-[9px] text-gray-400">
+                <span className="text-[15px] text-gray-400">
                   ({featuredProduct.rating || 5} Feedback)
                 </span>
 
@@ -255,60 +255,60 @@ const HotDeals = () => {
 
               <div className="mt-4">
 
-                <p className="text-[10px] text-gray-400">
+                <p className="text-[17px] text-gray-400">
                   Hurry up! Offer ends in:
                 </p>
 
                 <div className="mt-2 flex justify-center gap-3">
 
                   <div>
-                    <p className="text-sm font-semibold text-gray-900">
+                    <p className="text-lg font-semibold text-gray-900">
                       {formatTime(timeLeft.days)}
                     </p>
 
-                    <p className="text-[7px] uppercase text-gray-400">
+                    <p className="text-[17px] uppercase text-gray-400">
                       Days
                     </p>
                   </div>
 
-                  <span className="text-sm text-gray-400">
+                  <span className="text-lg text-gray-400">
                     :
                   </span>
 
                   <div>
-                    <p className="text-sm font-semibold text-gray-900">
+                    <p className="text-lg font-semibold text-gray-900">
                       {formatTime(timeLeft.hours)}
                     </p>
 
-                    <p className="text-[7px] uppercase text-gray-400">
+                    <p className="text-[17px] uppercase text-gray-400">
                       Hours
                     </p>
                   </div>
 
-                  <span className="text-sm text-gray-400">
+                  <span className="text-lg text-gray-400">
                     :
                   </span>
 
                   <div>
-                    <p className="text-sm font-semibold text-gray-900">
+                    <p className="text-lg font-semibold text-gray-900">
                       {formatTime(timeLeft.minutes)}
                     </p>
 
-                    <p className="text-[7px] uppercase text-gray-400">
+                    <p className="text-[17px] uppercase text-gray-400">
                       Mins
                     </p>
                   </div>
 
-                  <span className="text-sm text-gray-400">
+                  <span className="text-lg text-gray-400">
                     :
                   </span>
 
                   <div>
-                    <p className="text-sm font-semibold text-gray-900">
+                    <p className="text-lg font-semibold text-gray-900">
                       {formatTime(timeLeft.seconds)}
                     </p>
 
-                    <p className="text-[7px] uppercase text-gray-400">
+                    <p className="text-[17px] uppercase text-gray-400">
                       Secs
                     </p>
                   </div>
@@ -355,7 +355,7 @@ const HotDeals = () => {
                 {/* Sale */}
 
                 {product.discount && (
-                  <span className="absolute left-2 top-2 z-10 rounded-sm bg-red-500 px-2 py-1 text-[8px] font-medium text-white">
+                  <span className="absolute left-2 top-2 z-10 rounded-sm bg-red-500 px-4 py-3 text-[12px] font-medium text-white">
                     Sale {product.discount}%
                   </span>
                 )}
@@ -385,14 +385,14 @@ const HotDeals = () => {
                     type="button"
                     className="flex h-7 w-7 cursor-pointer items-center justify-center rounded-full border bg-white text-gray-600 shadow-sm transition hover:bg-green-600 hover:text-white"
                   >
-                    <Heart size={13} />
+                    <Heart size={17} />
                   </button>
 
                   <Link
                     to={`/product/${product.slug}`}
                     className="flex h-7 w-7 cursor-pointer items-center justify-center rounded-full border bg-white text-gray-600 shadow-sm transition hover:bg-green-600 hover:text-white"
                   >
-                    <Eye size={13} />
+                    <Eye size={17} />
                   </Link>
 
                 </div>
@@ -407,7 +407,7 @@ const HotDeals = () => {
 
                 <Link
                   to={`/product/${product.slug}`}
-                  className="block truncate text-[10px] text-gray-600 transition hover:text-green-600"
+                  className="block truncate text-[16px] text-gray-600 transition hover:text-green-600"
                 >
                   {product.name}
                 </Link>
@@ -416,12 +416,12 @@ const HotDeals = () => {
 
                   <div>
 
-                    <span className="text-xs font-medium text-gray-900">
+                    <span className="text-lg font-medium text-gray-900">
                       ${product.price}
                     </span>
 
                     {product.oldPrice && (
-                      <span className="ml-1 text-[8px] text-gray-400 line-through">
+                      <span className="ml-1 text-[17px] text-gray-400 line-through">
                         ${product.oldPrice}
                       </span>
                     )}
@@ -439,7 +439,7 @@ const HotDeals = () => {
                         : "bg-gray-100 text-gray-600"
                     }`}
                   >
-                    <ShoppingBag size={12} />
+                    <ShoppingBag size={20} />
                   </button>
 
                 </div>
@@ -452,14 +452,14 @@ const HotDeals = () => {
                     {[1, 2, 3, 4, 5].map((star) => (
                       <span
                         key={star}
-                        className="text-[9px]"
+                        className="text-[17px]"
                       >
                         ★
                       </span>
                     ))}
                   </div>
 
-                  <span className="ml-1 text-[8px] text-gray-400">
+                  <span className="ml-1 text-[17px] text-gray-400">
                     ({product.rating || 5})
                   </span>
 
